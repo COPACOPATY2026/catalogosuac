@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Catálogo de Servicios · Alcaldía Cuauhtémoc 2021</title>
+<script src="services-data.js"></script>
+<style>
+  /* ── TOKENS ────────────────────────────────────────────────── */
+  :root {
+    --ink:       #0D1B2A;
+    --blue:      #1B3A6B;
+    --blue-mid:  #2A5298;
+    --blue-lt:   #3F72C4;
+    --gold:      #C8960C;
+    --gold-lt:   #F0C842;
+    --cream:     #F7F4EE;
+    --warm-grey: #E8E4DC;
+    --mid-grey:  #8A8278;
+    --rule:      rgba(13,27,42,.12);
+    --cesac-bg:  #EBF2FF;
+    --cesac-acc: #1B3A6B;
+    --dir-bg:    #FFF8E8;
+    --dir-acc:   #7A5000;
+    --radius:    4px;
+    --shadow:    0 2px 12px rgba(13,27,42,.10);
+    --shadow-hover: 0 6px 24px rgba(13,27,42,.18);
+    font-size: 16px;
+  }
+
+  /* ── RESET ─────────────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  a { color: inherit; text-decoration: none; }
+  button { cursor: pointer; border: none; background: none; font: inherit; }
+  ul { list-style: none; }
+
+  /* ── MASTHEAD ──────────────────────────────────────────────── */
+  .masthead {
+    background: var(--blue);
+    background-image: linear-gradient(135deg, #0D1B2A 0%, #1B3A6B 50%, #2A5298 100%);
+    color: #fff;
+    padding: 0 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 16px rgba(0,0,0,.35);
+  }
+  .masthead-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: .75rem 0;
+  }
+  .masthead-logo {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    flex-shrink: 0;
+  }
+  .masthead-escudo {
+    width: 42px; height: 42px;
+    background: rgba(255,255,255,.15);
+    border: 1.5px solid rgba(255,255,255,.3);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+  }
+  .masthead-title { line-height: 1.15; }
+  .masthead-title .org { font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; opacity: .7; font-family: 'Arial', sans-serif; }
+  .masthead-title .name { font-size: 1rem; font-weight: bold; letter-spacing: .01em; }
+  .masthead-search {
+    flex: 1;
+    max-width: 440px;
+    position: relative;
+  }
+  .masthead-search input {
+    width: 100%;
+    padding: .5rem 1rem .5rem 2.5rem;
+    border-radius: 24px;
+    border: 1.5px solid rgba(255,255,255,.3);
+    background: rgba(255,255,255,.12);
+    color: #fff;
+    font-size: .9rem;
+    font-family: 'Arial', sans-serif;
+    outline: none;
+    transition: border-color .2s, background .2s;
+  }
+  .masthead-search input::placeholder { color: rgba(255,255,255,.55); }
+  .masthead-search input:focus { border-color: var(--gold-lt); background: rgba(255,255,255,.2); }
+  .masthead-search .search-icon {
+    position: absolute;
+    left: .8rem; top: 50%;
+    transform: translateY(-50%);
+    opacity: .6;
+    font-style: normal;
+    pointer-events: none;
+  }
+  .masthead-search .clear-btn {
+    position: absolute;
+    right: .75rem; top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255,255,255,.7);
+    font-size: 1.1rem;
+    display: none;
+    line-height: 1;
+  }
+  .masthead-search input:not(:placeholder-shown) ~ .clear-btn { display: block; }
+  .result-count {
+    font-family: 'Arial', sans-serif;
+    font-size: .78rem;
+    color: rgba(255,255,255,.6);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* ── KPI RIBBON ────────────────────────────────────────────── */
+  .kpi-ribbon {
+    background: var(--gold);
+    background-image: linear-gradient(90deg, #8B6500, #C8960C 40%, #E0AC10 70%, #C8960C);
+    color: #fff;
+    padding: .55rem 2rem;
+  }
+  .kpi-ribbon-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .kpi-ribbon-inner::-webkit-scrollbar { display: none; }
+  .kpi-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: .1rem 1.4rem;
+    border-right: 1px solid rgba(255,255,255,.25);
+    flex-shrink: 0;
+  }
+  .kpi-item:last-child { border-right: none; }
+  .kpi-value {
+    font-size: 1.25rem;
+    font-weight: bold;
+    letter-spacing: -.01em;
+    line-height: 1.1;
+    font-family: 'Arial', sans-serif;
+    text-shadow: 0 1px 2px rgba(0,0,0,.2);
+  }
+  .kpi-label {
+    font-size: .63rem;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    opacity: .85;
+    font-family: 'Arial', sans-serif;
+    white-space: nowrap;
+  }
+
+  /* ── MAIN LAYOUT ───────────────────────────────────────────── */
+  .layout {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 0;
+    min-height: calc(100vh - 120px);
+  }
+
+  /* ── SIDEBAR ───────────────────────────────────────────────── */
+  .sidebar {
+    background: #fff;
+    border-right: 1px solid var(--rule);
+    position: sticky;
+    top: 66px;
+    height: calc(100vh - 66px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: var(--warm-grey) transparent;
+    padding-bottom: 2rem;
+  }
+  .sidebar::-webkit-scrollbar { width: 4px; }
+  .sidebar::-webkit-scrollbar-thumb { background: var(--warm-grey); border-radius: 2px; }
+
+  .sidebar-section {
+    padding: 1rem 1.25rem .5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .sidebar-heading {
+    font-family: 'Arial', sans-serif;
+    font-size: .65rem;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--mid-grey);
+    margin-bottom: .6rem;
+  }
+
+  /* Filters */
+  .filter-chips { display: flex; flex-wrap: wrap; gap: .35rem; }
+  .chip {
+    font-family: 'Arial', sans-serif;
+    font-size: .72rem;
+    padding: .25rem .65rem;
+    border-radius: 12px;
+    border: 1.5px solid var(--warm-grey);
+    color: var(--ink);
+    background: #fff;
+    transition: all .15s;
+    cursor: pointer;
+  }
+  .chip:hover { border-color: var(--blue-lt); color: var(--blue); }
+  .chip.active { background: var(--blue); border-color: var(--blue); color: #fff; }
+  .chip.gold.active { background: var(--gold); border-color: var(--gold); color: #fff; }
+
+  /* Nav index */
+  .nav-area {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .4rem .75rem;
+    border-radius: var(--radius);
+    margin: .1rem 0;
+    cursor: pointer;
+    transition: background .15s;
+    font-family: 'Arial', sans-serif;
+    font-size: .8rem;
+  }
+  .nav-area:hover { background: var(--warm-grey); }
+  .nav-area.territorial { color: var(--dir-acc); }
+  .nav-badge {
+    margin-left: auto;
+    background: var(--warm-grey);
+    color: var(--mid-grey);
+    font-size: .65rem;
+    padding: .1rem .4rem;
+    border-radius: 8px;
+    font-family: 'Arial', sans-serif;
+  }
+
+  /* CESAC info card */
+  .cesac-card {
+    background: var(--cesac-bg);
+    border: 1px solid rgba(27,58,107,.15);
+    border-radius: var(--radius);
+    padding: .85rem 1rem;
+    font-family: 'Arial', sans-serif;
+    font-size: .75rem;
+    line-height: 1.55;
+  }
+  .cesac-card strong { color: var(--blue); display: block; margin-bottom: .35rem; font-size: .8rem; }
+  .cesac-card .cesac-link { color: var(--blue-mid); word-break: break-all; }
+
+  /* ── MAIN CONTENT ──────────────────────────────────────────── */
+  .main { padding: 2rem 2rem 4rem; }
+
+  /* Empty state */
+  .empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--mid-grey);
+    display: none;
+  }
+  .empty-state .empty-icon { font-size: 3rem; margin-bottom: 1rem; }
+  .empty-state p { font-family: 'Arial', sans-serif; font-size: 1rem; }
+
+  /* Section headers */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: .75rem;
+    border-bottom: 2px solid;
+  }
+  .section-header.cesac-header { border-color: var(--blue); }
+  .section-header.dir-header { border-color: var(--gold); }
+  .section-badge {
+    padding: .3rem .85rem;
+    border-radius: var(--radius);
+    font-family: 'Arial', sans-serif;
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+  .cesac-badge { background: var(--blue); color: #fff; }
+  .dir-badge { background: var(--gold); color: #fff; }
+  .section-title { font-size: 1.35rem; font-weight: bold; }
+  .section-count {
+    margin-left: auto;
+    font-family: 'Arial', sans-serif;
+    font-size: .8rem;
+    color: var(--mid-grey);
+  }
+  .section-block { margin-bottom: 3rem; }
+
+  /* Area group */
+  .area-group { margin-bottom: 2rem; }
+  .area-group-header {
+    display: flex;
+    align-items: baseline;
+    gap: .75rem;
+    margin-bottom: .75rem;
+    padding-left: .5rem;
+    border-left: 3px solid var(--warm-grey);
+  }
+  .area-group-header.cesac-group { border-color: var(--blue-lt); }
+  .area-group-header.dir-group { border-color: var(--gold); }
+  .area-name {
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: 'Arial', sans-serif;
+  }
+  .area-siglas {
+    font-family: 'Arial', sans-serif;
+    font-size: .7rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--mid-grey);
+    background: var(--warm-grey);
+    padding: .1rem .45rem;
+    border-radius: 3px;
+  }
+  .area-count {
+    margin-left: auto;
+    font-family: 'Arial', sans-serif;
+    font-size: .72rem;
+    color: var(--mid-grey);
+  }
+
+  /* Service cards */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: .75rem;
+  }
+
+  .card {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    transition: box-shadow .2s, transform .15s;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+  }
+  .card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+  .card.cesac-card-item { border-left: 3px solid var(--blue); }
+  .card.dir-card-item { border-left: 3px solid var(--gold); }
+
+  .card-head {
+    padding: .85rem 1rem .65rem;
+  }
+  .card-meta {
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+    margin-bottom: .5rem;
+  }
+  .tag {
+    font-family: 'Arial', sans-serif;
+    font-size: .62rem;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    padding: .1rem .45rem;
+    border-radius: 3px;
+    font-weight: 700;
+  }
+  .tag-cesac { background: var(--cesac-bg); color: var(--cesac-acc); }
+  .tag-dir { background: var(--dir-bg); color: var(--dir-acc); }
+  .tag-escrito { background: #E8F5E9; color: #2E7D32; }
+  .tag-formato { background: #FFF3E0; color: #E65100; }
+  .tag-suac { background: #F3E5F5; color: #6A1B9A; }
+  .clave-tag {
+    margin-left: auto;
+    font-family: 'Arial', sans-serif;
+    font-size: .62rem;
+    color: var(--mid-grey);
+  }
+
+  .card-name {
+    font-size: .92rem;
+    font-weight: bold;
+    line-height: 1.35;
+    margin-bottom: .35rem;
+  }
+  .card-desc {
+    font-family: 'Arial', sans-serif;
+    font-size: .78rem;
+    color: #444;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .5rem 1rem;
+    background: var(--cream);
+    border-top: 1px solid var(--rule);
+    font-family: 'Arial', sans-serif;
+    font-size: .72rem;
+    color: var(--mid-grey);
+  }
+  .footer-time { display: flex; align-items: center; gap: .25rem; }
+  .footer-cost { margin-left: auto; font-weight: 600; color: var(--ink); }
+  .footer-cost.free { color: #2E7D32; }
+
+  /* Expanded detail */
+  .card-detail {
+    display: none;
+    padding: 1rem;
+    background: #FAFAF8;
+    border-top: 1px solid var(--rule);
+    font-family: 'Arial', sans-serif;
+    font-size: .8rem;
+    line-height: 1.6;
+  }
+  .card.open .card-detail { display: block; }
+  .card.open .card-desc { -webkit-line-clamp: unset; }
+  .detail-row {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: .2rem .75rem;
+    margin-bottom: .35rem;
+  }
+  .detail-label { color: var(--mid-grey); font-size: .72rem; }
+  .detail-value { color: var(--ink); }
+  .expand-hint {
+    position: absolute;
+    bottom: .5rem;
+    right: .75rem;
+    font-size: .7rem;
+    color: var(--mid-grey);
+    font-family: 'Arial', sans-serif;
+    transition: opacity .15s;
+  }
+  .card:hover .expand-hint { opacity: 0; }
+
+  /* Directory */
+  .directory-section {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-bottom: 2.5rem;
+    box-shadow: var(--shadow);
+  }
+  .directory-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 1.25rem;
+    padding-bottom: .5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .dir-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: .75rem;
+  }
+  .dir-card {
+    background: var(--cream);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    padding: .75rem 1rem;
+  }
+  .dir-card.central { border-left: 3px solid var(--blue); }
+  .dir-card.territorial { border-left: 3px solid var(--gold); }
+  .dir-card-name { font-size: .82rem; font-weight: bold; font-family: 'Arial', sans-serif; margin-bottom: .2rem; }
+  .dir-card-meta { display: flex; align-items: center; gap: .5rem; }
+  .dir-card-siglas {
+    font-family: 'Arial', sans-serif;
+    font-size: .65rem;
+    color: var(--mid-grey);
+    background: var(--warm-grey);
+    padding: .05rem .35rem;
+    border-radius: 2px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+  }
+  .dir-card-count { font-family: 'Arial', sans-serif; font-size: .72rem; color: var(--mid-grey); margin-left: auto; }
+  .dir-type-label { font-family: 'Arial', sans-serif; font-size: .62rem; text-transform: uppercase; letter-spacing: .07em; color: var(--mid-grey); }
+
+  /* Hidden by filter */
+  .area-group.hidden, .card.hidden { display: none; }
+  .section-block.hidden { display: none; }
+
+  /* ── FOOTER ────────────────────────────────────────────────── */
+  .site-footer {
+    background: var(--ink);
+    color: rgba(255,255,255,.6);
+    text-align: center;
+    padding: 1.25rem 2rem;
+    font-family: 'Arial', sans-serif;
+    font-size: .75rem;
+    line-height: 1.7;
+  }
+  .site-footer a { color: rgba(255,255,255,.8); }
+  .site-footer strong { color: #fff; }
+
+  /* ── RESPONSIVE ────────────────────────────────────────────── */
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar { position: static; height: auto; border-right: none; border-bottom: 1px solid var(--rule); }
+    .kpi-item { padding: .1rem .85rem; }
+    .main { padding: 1.25rem 1rem 3rem; }
+  }
+  @media (max-width: 600px) {
+    .masthead-inner { flex-wrap: wrap; gap: .6rem; }
+    .masthead-search { max-width: 100%; width: 100%; }
+    .cards-grid { grid-template-columns: 1fr; }
+    .dir-grid { grid-template-columns: 1fr; }
+    .detail-row { grid-template-columns: 1fr; }
+    .detail-label { color: var(--blue-mid); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ MASTHEAD ══════════════════════════════════════════════════ -->
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="masthead-logo">
+      <div class="masthead-escudo">🏛️</div>
+      <div class="masthead-title">
+        <div class="org">Alcaldía Cuauhtémoc · CDMX</div>
+        <div class="name">Catálogo de Servicios 2021</div>
+      </div>
+    </div>
+    <div class="masthead-search">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="Buscar trámite, dependencia, requisito…" autocomplete="off" spellcheck="false">
+      <button class="clear-btn" id="clearBtn" onclick="clearSearch()" title="Limpiar búsqueda">✕</button>
+    </div>
+    <div class="result-count" id="resultCount"></div>
+  </div>
+</header>
+
+<!-- ══ KPI RIBBON ═════════════════════════════════════════════════ -->
+<div class="kpi-ribbon">
+  <div class="kpi-ribbon-inner">
+    <div class="kpi-item">
+      <span class="kpi-value" id="kpi-total">161</span>
+      <span class="kpi-label">Total Servicios</span>
+    </div>
+    <div class="kpi-item">
+      <span class="kpi-value" id="kpi-cesac">156</span>
+      <span class="kpi-label">Vía CESAC/SUAC</span>
+    </div>
+    <div class="kpi-item">
+      <span class="kpi-value" id="kpi-directo">5</span>
+      <span class="kpi-label">Solo Dependencia</span>
+    </div>
+    <div class="kpi-item">
+      <span class="kpi-value" id="kpi-escrito">114</span>
+      <span class="kpi-label">Escrito Libre</span>
+    </div>
+    <div class="kpi-item">
+      <span class="kpi-value" id="kpi-formato">6</span>
+      <span class="kpi-label">Formato Oficial</span>
+    </div>
+    <div class="kpi-item">
+      <span class="kpi-value">20 d.h.</span>
+      <span class="kpi-label">Tiempo Mínimo</span>
+    </div>
+    <div class="kpi-item">
+      <span class="kpi-value">~40 d.h.</span>
+      <span class="kpi-label">Tiempo Promedio</span>
+    </div>
+    <div class="kpi-item">
+      <span class="kpi-value">45 d.h.</span>
+      <span class="kpi-label">Tiempo Máximo</span>
+    </div>
+    <div class="kpi-item">
+      <span class="kpi-value">16</span>
+      <span class="kpi-label">Dependencias</span>
+    </div>
+    <div class="kpi-item">
+      <span class="kpi-value">Gratuito</span>
+      <span class="kpi-label">Costo Mayoría</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══ LAYOUT ════════════════════════════════════════════════════ -->
+<div class="layout">
+
+  <!-- ── SIDEBAR ───────────────────────────────────────────── -->
+  <aside class="sidebar" id="sidebar">
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Canal de trámite</div>
+      <div class="filter-chips">
+        <button class="chip active" data-filter="canal" data-val="todos" onclick="setFilter('canal','todos',this)">Todos</button>
+        <button class="chip" data-filter="canal" data-val="cesac" onclick="setFilter('canal','cesac',this)">CESAC / SUAC</button>
+        <button class="chip" data-filter="canal" data-val="directo" onclick="setFilter('canal','directo',this)">Solo Dependencia</button>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Tipo de solicitud</div>
+      <div class="filter-chips">
+        <button class="chip active" data-filter="formato" data-val="todos" onclick="setFilter('formato','todos',this)">Todos</button>
+        <button class="chip gold" data-filter="formato" data-val="escrito" onclick="setFilter('formato','escrito',this)">Escrito libre</button>
+        <button class="chip gold" data-filter="formato" data-val="formato" onclick="setFilter('formato','formato',this)">Formato oficial</button>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">CESAC — Contacto</div>
+      <div class="cesac-card">
+        <strong>📍 Ventanilla CESAC</strong>
+        Aldama y Mina s/n, Col. Buenavista<br>
+        Alc. Cuauhtémoc, CDMX<br>
+        <strong style="margin-top:.4rem">⏰ Horario</strong>
+        Lunes–Viernes 09:00–14:00 hrs<br>
+        <strong style="margin-top:.4rem">📧 Email</strong>
+        <a class="cesac-link" href="mailto:cesac@alcaldiacuauhtemoc.mx">cesac@alcaldiacuauhtemoc.mx</a><br>
+        <strong style="margin-top:.4rem">🌐 SUAC en línea</strong>
+        <a class="cesac-link" href="https://atencionciudadana.cdmx.gob.mx/" target="_blank">atencionciudadana.cdmx.gob.mx</a><br>
+        <strong style="margin-top:.4rem">📞 Locatel</strong>
+        (55) 5658-1111
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Índice por dependencia</div>
+      <div id="navIndex"></div>
+    </div>
+
+  </aside>
+
+  <!-- ── MAIN ───────────────────────────────────────────────── -->
+  <main class="main" id="mainContent">
+
+    <!-- Directory -->
+    <div class="directory-section" id="directorySection">
+      <div class="directory-title">📋 Directorio de Dependencias · Alcaldía Cuauhtémoc</div>
+      <div class="dir-grid" id="dirGrid"></div>
+    </div>
+
+    <!-- Empty state -->
+    <div class="empty-state" id="emptyState">
+      <div class="empty-icon">🔎</div>
+      <p>No se encontraron servicios que coincidan con tu búsqueda.<br>Prueba con otro término o limpia los filtros.</p>
+    </div>
+
+    <!-- SECTION A: CESAC/SUAC -->
+    <div class="section-block" id="block-cesac">
+      <div class="section-header cesac-header">
+        <span class="section-badge cesac-badge">CESAC / SUAC</span>
+        <h2 class="section-title">Trámites vía Ventanilla o en Línea</h2>
+        <span class="section-count" id="count-cesac"></span>
+      </div>
+      <div id="groups-cesac"></div>
+    </div>
+
+    <!-- SECTION B: Directo con Dependencia -->
+    <div class="section-block" id="block-directo">
+      <div class="section-header dir-header">
+        <span class="section-badge dir-badge">Solo Dependencia</span>
+        <h2 class="section-title">Trámites Directamente con la Dependencia</h2>
+        <span class="section-count" id="count-directo"></span>
+      </div>
+      <div id="groups-directo"></div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ══ FOOTER ════════════════════════════════════════════════════ -->
+<footer class="site-footer">
+  <strong>Catálogo de Servicios · Alcaldía Cuauhtémoc 2021</strong><br>
+  Fuente oficial: Alcaldía Cuauhtémoc, Ciudad de México · 
+  <a href="https://alcaldiacuauhtemoc.mx/" target="_blank">alcaldiacuauhtemoc.mx</a> ·
+  Publicado por COPACO Colonia Juárez para uso ciudadano
+</footer>
+
+<script>
+// ══ STATE ════════════════════════════════════════════════════════
+const state = { query: '', canal: 'todos', formato: 'todos' };
+
+// ══ BUILD UI ON LOAD ═════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  buildDirectory();
+  buildNavIndex();
+  buildServiceSections();
+  updateResultCount();
+});
+
+// ══ DIRECTORY ════════════════════════════════════════════════════
+function buildDirectory() {
+  const grid = document.getElementById('dirGrid');
+  const centrales = SERVICES_DATA.areas.filter(a => a.tipo === 'central');
+  const territoriales = SERVICES_DATA.areas.filter(a => a.tipo === 'territorial');
+
+  const renderGroup = (areas, tipo) => areas.map(a => {
+    const svcCount = SERVICES_DATA.services.filter(s => s.area_id === a.id).length;
+    return `<div class="dir-card ${tipo}">
+      <div class="dir-type-label">${tipo === 'central' ? 'Dirección Central' : 'Dir./Subdirección Territorial'}</div>
+      <div class="dir-card-name">${a.nombre}</div>
+      <div class="dir-card-meta">
+        <span class="dir-card-siglas">${a.siglas}</span>
+        <span class="dir-card-count">${svcCount} servicio${svcCount !== 1 ? 's' : ''}</span>
+      </div>
+    </div>`;
+  }).join('');
+
+  grid.innerHTML = renderGroup(centrales, 'central') + renderGroup(territoriales, 'territorial');
+}
+
+// ══ NAV INDEX ════════════════════════════════════════════════════
+function buildNavIndex() {
+  const nav = document.getElementById('navIndex');
+  nav.innerHTML = SERVICES_DATA.areas.map(a => {
+    const count = SERVICES_DATA.services.filter(s => s.area_id === a.id).length;
+    return `<div class="nav-area ${a.tipo === 'territorial' ? 'territorial' : ''}"
+      onclick="scrollToArea('${a.id}')">
+      <span>${a.nombre.length > 28 ? a.nombre.substring(0,28)+'…' : a.nombre}</span>
+      <span class="nav-badge">${count}</span>
+    </div>`;
+  }).join('');
+}
+
+// ══ SERVICE SECTIONS ═════════════════════════════════════════════
+function buildServiceSections() {
+  const cesacContainer = document.getElementById('groups-cesac');
+  const directoContainer = document.getElementById('groups-directo');
+
+  const cesacAreas = SERVICES_DATA.areas.filter(a => {
+    return SERVICES_DATA.services.some(s => s.area_id === a.id && s.via_cesac);
+  });
+  const directoAreas = SERVICES_DATA.areas.filter(a => {
+    return SERVICES_DATA.services.some(s => s.area_id === a.id && !s.via_cesac);
+  });
+
+  cesacContainer.innerHTML = cesacAreas.map(a => buildAreaGroup(a, true)).join('');
+  directoContainer.innerHTML = directoAreas.map(a => buildAreaGroup(a, false)).join('');
+}
+
+function buildAreaGroup(area, isCesac) {
+  const services = SERVICES_DATA.services.filter(s =>
+    s.area_id === area.id && (isCesac ? s.via_cesac : !s.via_cesac)
+  );
+  if (!services.length) return '';
+
+  const groupClass = isCesac ? 'cesac-group' : 'dir-group';
+  const cards = services.map(s => buildCard(s)).join('');
+
+  return `<div class="area-group" id="group-${area.id}-${isCesac ? 'cesac' : 'dir'}" data-area="${area.id}">
+    <div class="area-group-header ${groupClass}">
+      <span class="area-name">${area.nombre}</span>
+      <span class="area-siglas">${area.siglas}</span>
+      <span class="area-count">${services.length} servicio${services.length !== 1 ? 's' : ''}</span>
+    </div>
+    <div class="cards-grid">${cards}</div>
+  </div>`;
+}
+
+function buildCard(s) {
+  const isCesac = s.via_cesac;
+  const costo = s.costo || 'Consultar';
+  const isFree = costo.toLowerCase().includes('gratuit');
+  const tiempo = s.tiempo || 'Variable';
+
+  const tags = [];
+  if (s.via_cesac) tags.push('<span class="tag tag-cesac">CESAC</span>');
+  if (s.via_suac) tags.push('<span class="tag tag-suac">SUAC</span>');
+  if (s.escrito_libre) tags.push('<span class="tag tag-escrito">Escrito Libre</span>');
+  if (s.formato_oficial) tags.push('<span class="tag tag-formato">Formato Oficial</span>');
+
+  const safeReqs = (s.requisitos||'').replace(/"/g,'&quot;');
+  const safeTipo = (s.tipo_formato||'').replace(/"/g,'&quot;');
+  const safePub = (s.publico||'').replace(/"/g,'&quot;');
+
+  return `<div class="card ${isCesac ? 'cesac-card-item' : 'dir-card-item'}"
+    data-id="${s.id}"
+    data-search="${(s.nombre+' '+s.descripcion+' '+s.requisitos+' '+s.area_id).toLowerCase()}"
+    data-cesac="${s.via_cesac}"
+    data-escrito="${s.escrito_libre}"
+    data-formato="${s.formato_oficial}"
+    onclick="toggleCard(this)">
+    <div class="card-head">
+      <div class="card-meta">
+        ${tags.join('')}
+        <span class="clave-tag">${s.clave}</span>
+      </div>
+      <div class="card-name">${s.nombre}</div>
+      <div class="card-desc">${s.descripcion}</div>
+    </div>
+    <div class="card-footer">
+      <span class="footer-time">🕐 ${tiempo}</span>
+      <span class="footer-cost ${isFree ? 'free' : ''}">${isFree ? '✓ Gratuito' : costo}</span>
+    </div>
+    <div class="card-detail">
+      <div class="detail-row"><span class="detail-label">Tipo de solicitud</span><span class="detail-value">${safeTipo || '—'}</span></div>
+      <div class="detail-row"><span class="detail-label">Requisitos</span><span class="detail-value">${safeReqs || '—'}</span></div>
+      <div class="detail-row"><span class="detail-label">Dirigido a</span><span class="detail-value">${safePub || '—'}</span></div>
+      <div class="detail-row"><span class="detail-label">Tiempo de resp.</span><span class="detail-value">${tiempo}</span></div>
+      <div class="detail-row"><span class="detail-label">Costo</span><span class="detail-value">${costo}</span></div>
+    </div>
+    <span class="expand-hint">▼ ver detalle</span>
+  </div>`;
+}
+
+// ══ CARD TOGGLE ══════════════════════════════════════════════════
+function toggleCard(el) {
+  const wasOpen = el.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.card.open').forEach(c => c.classList.remove('open'));
+  if (!wasOpen) el.classList.add('open');
+}
+
+// ══ SEARCH ═══════════════════════════════════════════════════════
+const searchInput = document.getElementById('searchInput');
+searchInput.addEventListener('input', function() {
+  state.query = this.value.trim().toLowerCase();
+  applyFilters();
+});
+
+function clearSearch() {
+  searchInput.value = '';
+  state.query = '';
+  applyFilters();
+  searchInput.focus();
+}
+
+// ══ CHIP FILTERS ═════════════════════════════════════════════════
+function setFilter(type, val, btn) {
+  state[type] = val;
+  // Update chips in same group
+  document.querySelectorAll(`[data-filter="${type}"]`).forEach(c => {
+    c.classList.remove('active');
+    if (c.classList.contains('gold')) c.classList.remove('active');
+  });
+  btn.classList.add('active');
+  applyFilters();
+}
+
+// ══ APPLY FILTERS ════════════════════════════════════════════════
+function applyFilters() {
+  const q = state.query;
+  const canal = state.canal;
+  const fmt = state.formato;
+
+  let visibleCount = 0;
+  let cesacCount = 0;
+  let directoCount = 0;
+
+  document.querySelectorAll('.card').forEach(card => {
+    const matchSearch = !q || card.dataset.search.includes(q);
+    const isCesac = card.dataset.cesac === 'true';
+    const isEscrito = card.dataset.escrito === 'true';
+    const isFormato = card.dataset.formato === 'true';
+
+    const matchCanal = canal === 'todos'
+      || (canal === 'cesac' && isCesac)
+      || (canal === 'directo' && !isCesac);
+
+    const matchFmt = fmt === 'todos'
+      || (fmt === 'escrito' && isEscrito)
+      || (fmt === 'formato' && isFormato);
+
+    const visible = matchSearch && matchCanal && matchFmt;
+    card.classList.toggle('hidden', !visible);
+    if (visible) {
+      visibleCount++;
+      if (isCesac) cesacCount++; else directoCount++;
+    }
+  });
+
+  // Hide empty area groups
+  document.querySelectorAll('.area-group').forEach(group => {
+    const hasVisible = group.querySelectorAll('.card:not(.hidden)').length > 0;
+    group.classList.toggle('hidden', !hasVisible);
+  });
+
+  // Hide empty section blocks
+  const cesacBlock = document.getElementById('block-cesac');
+  const directoBlock = document.getElementById('block-directo');
+  cesacBlock.classList.toggle('hidden', cesacCount === 0);
+  directoBlock.classList.toggle('hidden', directoCount === 0);
+
+  // Update counts
+  document.getElementById('count-cesac').textContent = `${cesacCount} resultado${cesacCount !== 1 ? 's' : ''}`;
+  document.getElementById('count-directo').textContent = `${directoCount} resultado${directoCount !== 1 ? 's' : ''}`;
+
+  // Directory visibility
+  document.getElementById('directorySection').style.display = (q || canal !== 'todos' || fmt !== 'todos') ? 'none' : '';
+
+  // Empty state
+  document.getElementById('emptyState').style.display = visibleCount === 0 ? 'block' : 'none';
+
+  updateResultCount(visibleCount);
+}
+
+function updateResultCount(count) {
+  const el = document.getElementById('resultCount');
+  if (count === undefined) {
+    el.textContent = `${SERVICES_DATA.services.length} servicios`;
+  } else if (state.query || state.canal !== 'todos' || state.formato !== 'todos') {
+    el.textContent = `${count} de ${SERVICES_DATA.services.length}`;
+  } else {
+    el.textContent = `${SERVICES_DATA.services.length} servicios`;
+  }
+}
+
+// ══ SCROLL TO AREA ═══════════════════════════════════════════════
+function scrollToArea(areaId) {
+  // Try cesac group first, then directo
+  const el = document.getElementById(`group-${areaId}-cesac`)
+          || document.getElementById(`group-${areaId}-dir`);
+  if (el) {
+    const offset = 80;
+    const top = el.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top, behavior: 'smooth' });
+  }
+}
+</script>
+</body>
+</html>
