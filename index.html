@@ -6,104 +6,80 @@
 <meta name="description" content="Catálogo de Servicios de Alcaldía Cuauhtémoc Vigentes — 161 trámites ciudadanos, elaborado por COPACO Colonia Juárez.">
 <title>Catálogo de Servicios de Alcaldía Cuauhtémoc Vigentes</title>
 
-<!-- Tipografía: Cormorant Garamond (firma Patricia Vivar) -->
+<!-- Inter (cuerpo — máxima legibilidad en pantalla, cualquier dispositivo)  -->
+<!-- Playfair Display (títulos — autoridad institucional con jerarquía clara) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Cormorant+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 
 <script src="services-data.js"></script>
 
 <style>
 /* ═══════════════════════════════════════════════════════════════
-   TOKENS — paleta extraída de la firma Patricia Vivar Piñón
+   TOKENS — paleta Patricia Vivar Piñón
+   Tipografía: Inter (body) + Playfair Display (display)
 ═══════════════════════════════════════════════════════════════ */
 :root {
-  /* Color base de firma */
-  --purple-deep:   #4B3880;
-  --purple-mid:    #6B5B9E;
-  --purple-light:  #9B9BAA;
-  --purple-ghost:  #D8D0C8;
-  --cream:         #F5F0E8;
-  --cream-dark:    #EDE7DB;
-
-  /* Funcionales */
-  --ink:           #1A1226;
-  --mid:           #4B3880;
-  --muted:         #9B9BAA;
-  --rule:          rgba(155,155,170,.25);
-  --gold:          #B8963C;
-  --gold-lt:       #D4AC50;
-  --cesac-bg:      #EDE9F8;
-  --dir-bg:        #FBF7ED;
-  --shadow:        0 2px 16px rgba(75,56,128,.10);
-  --shadow-hover:  0 6px 28px rgba(75,56,128,.22);
-
-  /* Accesibilidad: escala tipográfica dinámica */
-  --a11y-scale: 1;
-  --base-size: calc(16px * var(--a11y-scale));
-
-  /* Radios y espaciado */
-  --radius: 6px;
-  --radius-lg: 12px;
+  --purple-deep:  #4B3880;
+  --purple-mid:   #6B5B9E;
+  --purple-light: #9B9BAA;
+  --purple-ghost: #D8D0C8;
+  --cream:        #F5F0E8;
+  --cream-dark:   #EDE7DB;
+  --ink:          #1A1226;
+  --muted:        #6B6478;
+  --rule:         rgba(155,155,170,.2);
+  --gold:         #B8963C;
+  --gold-lt:      #D4AC50;
+  --cesac-bg:     #EDE9F8;
+  --dir-bg:       #FBF7ED;
+  --shadow:       0 2px 14px rgba(75,56,128,.09);
+  --shadow-hover: 0 6px 28px rgba(75,56,128,.20);
+  --radius:       6px;
+  --radius-lg:    12px;
+  --a11y-scale:   1;
+  --base-size:    calc(16px * var(--a11y-scale));
+  /* Fuentes */
+  --font-body:    'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Playfair Display', Georgia, serif;
 }
 
-/* ── Modo alto contraste ────────────────────────────────────── */
+/* ── Modos de contraste ───────────────────────────────────── */
 .contrast-high {
-  --cream:        #ffffff;
-  --cream-dark:   #f0eefc;
-  --ink:          #000000;
-  --purple-mid:   #3B2870;
-  --purple-light: #444;
-  --muted:        #444;
-  --rule:         rgba(0,0,0,.3);
-  --shadow:       0 2px 8px rgba(0,0,0,.3);
+  --cream: #fff; --cream-dark: #f0eefc; --ink: #000;
+  --purple-mid: #3B2870; --muted: #333; --rule: rgba(0,0,0,.25);
 }
 .contrast-dark {
-  --cream:        #1A1226;
-  --cream-dark:   #241932;
-  --ink:          #EDE7DB;
-  --purple-mid:   #B8A8EE;
-  --purple-deep:  #C8B8FF;
-  --purple-light: #9B9BAA;
-  --muted:        #9B9BAA;
-  --rule:         rgba(200,184,255,.15);
-  --cesac-bg:     #2A1F40;
-  --dir-bg:       #2A2210;
-  --shadow:       0 2px 16px rgba(0,0,0,.5);
+  --cream: #1A1226; --cream-dark: #241932; --ink: #EDE7DB;
+  --purple-mid: #B8A8EE; --purple-deep: #C8B8FF; --muted: #9B9BAA;
+  --rule: rgba(200,184,255,.15); --cesac-bg: #2A1F40; --dir-bg: #2A2210;
 }
 
-/* ── Reset ──────────────────────────────────────────────────── */
+/* ── Reset ────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { font-size: var(--base-size); scroll-behavior: smooth; }
 body {
-  font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  font-family: var(--font-body);
   background: var(--cream);
   color: var(--ink);
-  line-height: 1.65;
+  line-height: 1.6;
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
   transition: background .25s, color .25s;
 }
 a { color: var(--purple-deep); }
 a:focus-visible { outline: 2px solid var(--purple-mid); outline-offset: 3px; border-radius: 2px; }
-button { cursor: pointer; border: none; background: none; font: inherit; }
+button { cursor: pointer; border: none; background: none; font-family: var(--font-body); }
 button:focus-visible { outline: 2px solid var(--purple-mid); outline-offset: 3px; border-radius: 3px; }
 ul { list-style: none; }
-img { max-width: 100%; display: block; }
 
-/* ── Skip link (accesibilidad) ──────────────────────────────── */
+/* ── Skip link ────────────────────────────────────────────── */
 .skip-link {
-  position: absolute;
-  left: -9999px;
-  top: 0.5rem;
-  background: var(--purple-deep);
-  color: #fff;
-  padding: .5rem 1rem;
-  border-radius: var(--radius);
-  font-family: 'Cormorant SC', serif;
-  font-size: .85rem;
-  letter-spacing: .06em;
-  z-index: 9999;
-  text-decoration: none;
+  position: absolute; left: -9999px; top: .5rem;
+  background: var(--purple-deep); color: #fff;
+  padding: .5rem 1rem; border-radius: var(--radius);
+  font-size: .8rem; font-weight: 600; z-index: 9999;
+  text-decoration: none; font-family: var(--font-body);
 }
 .skip-link:focus { left: 1rem; }
 
@@ -114,810 +90,380 @@ img { max-width: 100%; display: block; }
   background: linear-gradient(135deg, #1A1226 0%, #2C1F5C 45%, #4B3880 100%);
   color: #fff;
   padding: 0 1rem;
-  position: sticky;
-  top: 0;
-  z-index: 200;
+  position: sticky; top: 0; z-index: 200;
   box-shadow: 0 2px 20px rgba(26,18,38,.5);
 }
 .masthead-inner {
-  max-width: 1400px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: .7rem 0;
-  flex-wrap: wrap;
+  max-width: 1400px; margin: 0 auto;
+  display: flex; align-items: center; gap: 1rem;
+  padding: .7rem 0; flex-wrap: wrap;
 }
-.masthead-logo {
-  display: flex;
-  align-items: center;
-  gap: .75rem;
-  flex-shrink: 0;
-  min-width: 0;
-}
+.masthead-logo { display: flex; align-items: center; gap: .7rem; flex-shrink: 0; }
 .masthead-escudo {
-  width: 40px; height: 40px;
+  width: 38px; height: 38px;
   background: rgba(255,255,255,.12);
-  border: 1.5px solid rgba(255,255,255,.28);
+  border: 1.5px solid rgba(255,255,255,.26);
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  font-size: 1.3rem;
-  flex-shrink: 0;
+  font-size: 1.2rem; flex-shrink: 0;
 }
-.masthead-title { line-height: 1.15; min-width: 0; }
 .masthead-title .org {
-  font-family: 'Cormorant SC', serif;
-  font-size: .62rem;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  opacity: .65;
+  font-size: .6rem; font-weight: 500; letter-spacing: .14em;
+  text-transform: uppercase; opacity: .6;
 }
 .masthead-title .name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(.9rem, 2.5vw, 1.1rem);
-  font-weight: 400;
-  letter-spacing: .02em;
-  white-space: normal;
-  line-height: 1.2;
+  font-family: var(--font-display);
+  font-size: clamp(.88rem, 2.2vw, 1.05rem);
+  font-weight: 600; letter-spacing: .01em; line-height: 1.2;
 }
 .masthead-search {
-  flex: 1;
-  min-width: 180px;
-  max-width: 420px;
-  position: relative;
+  flex: 1; min-width: 160px; max-width: 420px; position: relative;
 }
 .masthead-search input {
   width: 100%;
-  padding: .5rem 2.2rem .5rem 2.4rem;
-  border-radius: 24px;
-  border: 1.5px solid rgba(255,255,255,.25);
+  padding: .48rem 2rem .48rem 2.3rem;
+  border-radius: 22px;
+  border: 1.5px solid rgba(255,255,255,.22);
   background: rgba(255,255,255,.10);
-  color: #fff;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1rem;
-  outline: none;
-  transition: border-color .2s, background .2s;
+  color: #fff; font-family: var(--font-body); font-size: .85rem;
+  outline: none; transition: border-color .2s, background .2s;
 }
-.masthead-search input::placeholder { color: rgba(255,255,255,.45); font-style: italic; }
-.masthead-search input:focus { border-color: var(--gold-lt); background: rgba(255,255,255,.18); }
-.search-icon {
-  position: absolute;
-  left: .8rem; top: 50%;
-  transform: translateY(-50%);
-  opacity: .55; pointer-events: none; font-style: normal;
-}
+.masthead-search input::placeholder { color: rgba(255,255,255,.42); }
+.masthead-search input:focus { border-color: var(--gold-lt); background: rgba(255,255,255,.17); }
+.search-icon { position: absolute; left: .75rem; top: 50%; transform: translateY(-50%); opacity: .5; pointer-events: none; }
 .clear-btn {
-  position: absolute;
-  right: .7rem; top: 50%;
-  transform: translateY(-50%);
-  color: rgba(255,255,255,.65);
-  font-size: 1rem;
-  line-height: 1;
-  display: none;
-  padding: .15rem .3rem;
-  border-radius: 50%;
-  transition: color .15s;
+  position: absolute; right: .65rem; top: 50%; transform: translateY(-50%);
+  color: rgba(255,255,255,.6); font-size: .95rem; line-height: 1;
+  display: none; padding: .15rem .3rem; border-radius: 50%; transition: color .15s;
 }
 .clear-btn:hover { color: #fff; }
 .masthead-search input:not(:placeholder-shown) ~ .clear-btn { display: block; }
 .result-count {
-  font-family: 'Cormorant SC', serif;
-  font-size: .7rem;
-  letter-spacing: .1em;
-  color: rgba(255,255,255,.55);
-  white-space: nowrap;
-  flex-shrink: 0;
+  font-size: .7rem; font-weight: 500; letter-spacing: .06em;
+  color: rgba(255,255,255,.5); white-space: nowrap; flex-shrink: 0;
 }
-
-/* ── Botón de accesibilidad en masthead ─────────────────────── */
 .a11y-trigger {
-  background: rgba(255,255,255,.10);
-  border: 1.5px solid rgba(255,255,255,.22);
-  border-radius: var(--radius);
-  color: #fff;
-  padding: .4rem .7rem;
-  font-family: 'Cormorant SC', serif;
-  font-size: .7rem;
-  letter-spacing: .1em;
-  display: flex; align-items: center; gap: .4rem;
-  flex-shrink: 0;
+  background: rgba(255,255,255,.10); border: 1.5px solid rgba(255,255,255,.2);
+  border-radius: var(--radius); color: #fff; padding: .38rem .7rem;
+  font-size: .72rem; font-weight: 500; letter-spacing: .04em;
+  display: flex; align-items: center; gap: .35rem; flex-shrink: 0;
   transition: background .15s, border-color .15s;
 }
-.a11y-trigger:hover { background: rgba(255,255,255,.2); border-color: var(--gold-lt); }
-.a11y-trigger[aria-expanded="true"] { background: rgba(255,255,255,.22); border-color: var(--gold-lt); }
+.a11y-trigger:hover, .a11y-trigger[aria-expanded="true"] {
+  background: rgba(255,255,255,.2); border-color: var(--gold-lt);
+}
 
 /* ═══════════════════════════════════════════════════════════════
-   PANEL DE ACCESIBILIDAD
+   PANEL ACCESIBILIDAD
 ═══════════════════════════════════════════════════════════════ */
 .a11y-panel {
-  position: fixed;
-  top: 70px;
-  right: 1rem;
-  z-index: 300;
-  background: var(--cream);
-  border: 1.5px solid var(--purple-ghost);
+  position: fixed; top: 68px; right: 1rem; z-index: 300;
+  background: var(--cream); border: 1.5px solid var(--purple-ghost);
   border-radius: var(--radius-lg);
-  box-shadow: 0 8px 32px rgba(75,56,128,.3);
-  padding: 1.25rem 1.5rem 1.5rem;
-  width: min(320px, calc(100vw - 2rem));
+  box-shadow: 0 8px 32px rgba(75,56,128,.28);
+  padding: 1.2rem 1.4rem 1.4rem;
+  width: min(310px, calc(100vw - 2rem));
+  font-family: var(--font-body);
 }
 .a11y-panel[hidden] { display: none; }
-.a11y-panel-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1.1rem;
-  padding-bottom: .75rem;
-  border-bottom: 1px solid var(--rule);
+.a11y-panel-hd {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 1rem; padding-bottom: .7rem; border-bottom: 1px solid var(--rule);
 }
-.a11y-panel-title {
-  font-family: 'Cormorant SC', serif;
-  font-size: .85rem;
-  letter-spacing: .12em;
-  color: var(--purple-deep);
-  text-transform: uppercase;
-}
-.a11y-close {
-  color: var(--muted);
-  font-size: 1.1rem;
-  line-height: 1;
-  padding: .25rem .4rem;
-  border-radius: 50%;
-  transition: color .15s, background .15s;
-}
+.a11y-panel-title { font-size: .72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--purple-deep); }
+.a11y-close { color: var(--muted); font-size: 1rem; padding: .2rem .4rem; border-radius: 50%; transition: color .15s, background .15s; }
 .a11y-close:hover { color: var(--purple-deep); background: var(--cream-dark); }
-.a11y-group { margin-bottom: 1.1rem; }
-.a11y-group-label {
-  font-family: 'Cormorant SC', serif;
-  font-size: .68rem;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: var(--muted);
-  display: block;
-  margin-bottom: .6rem;
-}
-.a11y-font-controls {
-  display: flex;
-  align-items: center;
-  gap: .5rem;
-}
+.a11y-group { margin-bottom: 1rem; }
+.a11y-group-lbl { font-size: .67rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: .55rem; }
+.a11y-font-row { display: flex; align-items: center; gap: .45rem; }
 .a11y-btn {
-  background: var(--cream-dark);
-  border: 1.5px solid var(--purple-ghost);
-  border-radius: var(--radius);
-  color: var(--purple-deep);
-  padding: .45rem .85rem;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1rem;
-  font-weight: 500;
+  background: var(--cream-dark); border: 1.5px solid var(--purple-ghost);
+  border-radius: var(--radius); color: var(--purple-deep);
+  padding: .42rem .8rem; font-size: .88rem; font-weight: 600;
+  min-width: 36px; text-align: center;
   transition: background .15s, border-color .15s;
-  min-width: 38px;
-  text-align: center;
 }
 .a11y-btn:hover { background: var(--cesac-bg); border-color: var(--purple-mid); }
-.a11y-font-display {
-  font-family: 'Cormorant SC', serif;
-  font-size: .82rem;
-  letter-spacing: .08em;
-  color: var(--purple-deep);
-  min-width: 42px;
-  text-align: center;
-  flex: 1;
-}
+.a11y-font-pct { font-size: .78rem; font-weight: 500; color: var(--purple-deep); min-width: 40px; text-align: center; flex: 1; }
 .a11y-contrast-btn {
-  width: 100%;
-  background: var(--cream-dark);
-  border: 1.5px solid var(--purple-ghost);
-  border-radius: var(--radius);
-  color: var(--purple-deep);
-  padding: .6rem 1rem;
-  font-family: 'Cormorant SC', serif;
-  font-size: .78rem;
-  letter-spacing: .08em;
-  text-align: left;
-  display: flex; align-items: center; gap: .6rem;
+  width: 100%; background: var(--cream-dark); border: 1.5px solid var(--purple-ghost);
+  border-radius: var(--radius); color: var(--purple-deep);
+  padding: .55rem .9rem; font-size: .78rem; font-weight: 500;
+  text-align: left; display: flex; align-items: center; gap: .55rem;
   transition: background .15s, border-color .15s;
 }
 .a11y-contrast-btn:hover { background: var(--cesac-bg); border-color: var(--purple-mid); }
-.a11y-note {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: .8rem;
-  color: var(--muted);
-  font-style: italic;
-  line-height: 1.45;
-  border-top: 1px solid var(--rule);
-  padding-top: .75rem;
-  margin-top: .2rem;
-}
+.a11y-note { font-size: .73rem; color: var(--muted); line-height: 1.5; border-top: 1px solid var(--rule); padding-top: .7rem; margin-top: .2rem; }
 
 /* ═══════════════════════════════════════════════════════════════
    KPI RIBBON
 ═══════════════════════════════════════════════════════════════ */
 .kpi-ribbon {
   background: linear-gradient(90deg, #3B2870, var(--purple-mid) 50%, #7B6BAE);
-  color: rgba(255,255,255,.95);
-  padding: .5rem 1rem;
-  overflow-x: auto;
-  scrollbar-width: none;
+  color: rgba(255,255,255,.95); padding: .48rem 1rem;
+  overflow-x: auto; scrollbar-width: none;
 }
 .kpi-ribbon::-webkit-scrollbar { display: none; }
-.kpi-inner {
-  max-width: 1400px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-}
+.kpi-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; }
 .kpi-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: .1rem 1.2rem;
-  border-right: 1px solid rgba(255,255,255,.2);
+  display: flex; flex-direction: column; align-items: center;
+  padding: .08rem 1.1rem; border-right: 1px solid rgba(255,255,255,.18);
   flex-shrink: 0;
 }
 .kpi-item:last-child { border-right: none; }
-.kpi-value {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.3rem;
-  font-weight: 500;
-  letter-spacing: -.01em;
-  line-height: 1.1;
-}
-.kpi-label {
-  font-family: 'Cormorant SC', serif;
-  font-size: .58rem;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  opacity: .78;
-  white-space: nowrap;
-}
+.kpi-value { font-family: var(--font-display); font-size: 1.2rem; font-weight: 600; line-height: 1.1; }
+.kpi-label { font-size: .57rem; font-weight: 500; letter-spacing: .09em; text-transform: uppercase; opacity: .72; white-space: nowrap; }
 
 /* ═══════════════════════════════════════════════════════════════
    LAYOUT
 ═══════════════════════════════════════════════════════════════ */
-.layout {
-  max-width: 1400px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 264px 1fr;
-}
+.layout { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr; }
 
 /* ═══════════════════════════════════════════════════════════════
    SIDEBAR
 ═══════════════════════════════════════════════════════════════ */
 .sidebar {
-  background: #fff;
-  border-right: 1px solid var(--rule);
-  position: sticky;
-  top: 66px;
-  height: calc(100vh - 66px);
-  overflow-y: auto;
-  overflow-x: hidden;
-  scrollbar-width: thin;
-  scrollbar-color: var(--purple-ghost) transparent;
-  padding-bottom: 2rem;
+  background: #fff; border-right: 1px solid var(--rule);
+  overflow-x: hidden; padding-bottom: 1.5rem;
 }
-.sidebar::-webkit-scrollbar { width: 4px; }
-.sidebar::-webkit-scrollbar-thumb { background: var(--purple-ghost); border-radius: 2px; }
-
-.sidebar-block {
-  padding: 1.1rem 1.25rem .75rem;
-  border-bottom: 1px solid var(--rule);
-}
+.sidebar-block { padding: 1rem 1.2rem .75rem; border-bottom: 1px solid var(--rule); }
 .sidebar-heading {
-  font-family: 'Cormorant SC', serif;
-  font-size: .62rem;
-  font-weight: 500;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: .65rem;
+  font-size: .63rem; font-weight: 600; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: .6rem;
 }
 
-/* Chips de filtro */
-.chips { display: flex; flex-wrap: wrap; gap: .35rem; }
+/* Chips */
+.chips { display: flex; flex-wrap: wrap; gap: .3rem; }
 .chip {
-  font-family: 'Cormorant SC', serif;
-  font-size: .68rem;
-  letter-spacing: .08em;
-  padding: .28rem .7rem;
-  border-radius: 14px;
-  border: 1.5px solid var(--purple-ghost);
-  color: var(--ink);
-  background: transparent;
-  transition: all .15s;
-  cursor: pointer;
+  font-size: .72rem; font-weight: 500; letter-spacing: .03em;
+  padding: .26rem .65rem; border-radius: 14px;
+  border: 1.5px solid var(--purple-ghost); color: var(--ink);
+  background: transparent; transition: all .15s; cursor: pointer;
 }
 .chip:hover { border-color: var(--purple-mid); color: var(--purple-deep); }
 .chip.active { background: var(--purple-deep); border-color: var(--purple-deep); color: #fff; }
 
-/* Card de contacto Patricia Vivar en sidebar */
+/* Card Patricia Vivar */
 .paty-card {
   background: var(--cesac-bg);
-  border: 1px solid rgba(107,91,158,.2);
+  border: 1px solid rgba(107,91,158,.18);
   border-left: 3px solid var(--purple-mid);
-  border-radius: var(--radius);
-  padding: 1rem 1.1rem;
+  border-radius: var(--radius); padding: 1rem 1.1rem;
 }
-.paty-card .paty-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.05rem;
-  font-weight: 400;
-  color: var(--purple-deep);
-  letter-spacing: .04em;
-  margin-bottom: .15rem;
-}
-.paty-card .paty-title {
-  font-family: 'Cormorant SC', serif;
-  font-size: .6rem;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: .7rem;
-}
-.paty-card .paty-sep {
-  border: none;
-  border-top: 1px solid var(--purple-ghost);
-  margin: .6rem 0;
-}
-.paty-row {
-  display: flex;
-  align-items: flex-start;
-  gap: .45rem;
-  margin-bottom: .35rem;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: .82rem;
-  color: var(--ink);
-  line-height: 1.4;
-}
-.paty-icon { flex-shrink: 0; margin-top: .05rem; font-style: normal; }
-.paty-row a { color: var(--purple-deep); text-decoration: none; }
+.paty-name { font-family: var(--font-display); font-size: 1rem; font-weight: 400; color: var(--purple-deep); letter-spacing: .01em; margin-bottom: .1rem; }
+.paty-title { font-size: .63rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: .65rem; }
+.paty-sep { border: none; border-top: 1px solid var(--purple-ghost); margin: .55rem 0; }
+.paty-row { display: flex; align-items: flex-start; gap: .4rem; margin-bottom: .32rem; font-size: .8rem; color: var(--ink); line-height: 1.4; }
+.paty-icon { flex-shrink: 0; margin-top: .05rem; }
+.paty-row a { color: var(--purple-deep); text-decoration: none; font-weight: 500; }
 .paty-row a:hover { text-decoration: underline; }
 
-/* Sección CESAC institucional */
-.cesac-inst-card {
-  background: var(--dir-bg);
-  border: 1px solid rgba(184,150,60,.2);
-  border-left: 3px solid var(--gold);
-  border-radius: var(--radius);
-  padding: .85rem 1rem;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: .8rem;
-  color: var(--ink);
-  line-height: 1.55;
+/* Card CESAC institucional */
+.cesac-card {
+  background: var(--dir-bg); border: 1px solid rgba(184,150,60,.18);
+  border-left: 3px solid var(--gold); border-radius: var(--radius);
+  padding: .85rem 1rem; font-size: .78rem; color: var(--ink); line-height: 1.6;
 }
-.cesac-inst-card strong { color: var(--gold); display: block; margin-bottom: .3rem; font-size: .82rem; }
-.cesac-inst-card a { color: var(--purple-mid); word-break: break-all; }
+.cesac-card strong { color: #7A5500; display: block; margin-bottom: .25rem; font-size: .78rem; }
+.cesac-card a { color: var(--purple-mid); word-break: break-all; }
 
-/* Índice de navegación */
+/* Nav index */
 .nav-area {
-  display: flex;
-  align-items: center;
-  gap: .45rem;
-  padding: .38rem .65rem;
-  border-radius: var(--radius);
-  margin: .08rem 0;
-  cursor: pointer;
-  transition: background .15s;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: .82rem;
-  color: var(--ink);
-  text-align: left;
-  width: 100%;
+  display: flex; align-items: center; gap: .4rem;
+  padding: .36rem .6rem; border-radius: var(--radius);
+  margin: .06rem 0; cursor: pointer; width: 100%; text-align: left;
+  font-size: .8rem; color: var(--ink); transition: background .15s;
 }
 .nav-area:hover { background: var(--cream-dark); color: var(--purple-deep); }
 .nav-area.territorial { color: #7A5500; }
 .nav-badge {
-  margin-left: auto;
-  background: var(--cream);
-  color: var(--muted);
-  font-family: 'Cormorant SC', serif;
-  font-size: .6rem;
-  letter-spacing: .06em;
-  padding: .08rem .4rem;
-  border-radius: 10px;
-  flex-shrink: 0;
+  margin-left: auto; background: var(--cream);
+  color: var(--muted); font-size: .62rem; font-weight: 500;
+  padding: .06rem .38rem; border-radius: 9px; flex-shrink: 0;
 }
 
 /* ═══════════════════════════════════════════════════════════════
    MAIN
 ═══════════════════════════════════════════════════════════════ */
-.main {
-  padding: 1.75rem 1.75rem 4rem;
-  min-width: 0;
-}
+.main { padding: 1.1rem .9rem 3rem; min-width: 0; }
 
 /* Directorio */
 .directory-wrap {
-  background: #fff;
-  border: 1px solid var(--rule);
-  border-radius: var(--radius-lg);
-  padding: 1.5rem;
-  margin-bottom: 2.5rem;
-  box-shadow: var(--shadow);
+  background: #fff; border: 1px solid var(--rule);
+  border-radius: var(--radius-lg); padding: 1.4rem;
+  margin-bottom: 2.25rem; box-shadow: var(--shadow);
 }
 .directory-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.1rem;
-  font-weight: 400;
-  margin-bottom: 1.1rem;
-  padding-bottom: .6rem;
-  border-bottom: 1px solid var(--rule);
-  color: var(--purple-deep);
-  letter-spacing: .02em;
+  font-family: var(--font-display); font-size: 1.05rem; font-weight: 400;
+  color: var(--purple-deep); margin-bottom: 1rem;
+  padding-bottom: .55rem; border-bottom: 1px solid var(--rule);
 }
-.dir-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: .65rem;
-}
-.dir-card {
-  background: var(--cream);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
-  padding: .7rem .9rem;
-}
-.dir-card.central  { border-left: 3px solid var(--purple-mid); }
+.dir-grid { display: grid; grid-template-columns: 1fr; gap: .6rem; }
+.dir-card { background: var(--cream); border: 1px solid var(--rule); border-radius: var(--radius); padding: .65rem .85rem; }
+.dir-card.central { border-left: 3px solid var(--purple-mid); }
 .dir-card.territorial { border-left: 3px solid var(--gold); }
-.dir-type {
-  font-family: 'Cormorant SC', serif;
-  font-size: .58rem;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: .18rem;
-}
-.dir-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: .85rem;
-  color: var(--ink);
-  line-height: 1.3;
-  margin-bottom: .3rem;
-}
-.dir-meta { display: flex; align-items: center; gap: .4rem; }
-.dir-siglas {
-  font-family: 'Cormorant SC', serif;
-  font-size: .6rem;
-  letter-spacing: .07em;
-  color: var(--muted);
-  background: var(--cream-dark);
-  padding: .05rem .35rem;
-  border-radius: 3px;
-}
-.dir-count {
-  font-family: 'Cormorant SC', serif;
-  font-size: .62rem;
-  letter-spacing: .06em;
-  color: var(--muted);
-  margin-left: auto;
-}
+.dir-type { font-size: .6rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: .15rem; }
+.dir-name { font-size: .83rem; color: var(--ink); line-height: 1.3; margin-bottom: .28rem; font-weight: 500; }
+.dir-meta { display: flex; align-items: center; gap: .38rem; }
+.dir-siglas { font-size: .62rem; font-weight: 600; letter-spacing: .07em; color: var(--muted); background: var(--cream-dark); padding: .04rem .32rem; border-radius: 3px; }
+.dir-count { font-size: .62rem; color: var(--muted); margin-left: auto; }
 
 /* Empty state */
-.empty-state {
-  display: none;
-  text-align: center;
-  padding: 4rem 2rem;
-  color: var(--muted);
-}
-.empty-icon { font-size: 2.5rem; margin-bottom: .75rem; }
-.empty-state p {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1rem;
-  font-style: italic;
-}
+.empty-state { display: none; text-align: center; padding: 3.5rem 2rem; color: var(--muted); }
+.empty-icon { font-size: 2.2rem; margin-bottom: .65rem; }
+.empty-state p { font-size: .9rem; }
 
 /* Section blocks */
-.section-block { margin-bottom: 3rem; }
+.section-block { margin-bottom: 2.75rem; }
 .section-block.hidden { display: none; }
-
 .section-header {
-  display: flex;
-  align-items: center;
-  gap: .85rem;
-  margin-bottom: 1.25rem;
-  padding-bottom: .65rem;
-  border-bottom: 2px solid;
-  flex-wrap: wrap;
-  gap: .6rem;
+  display: flex; align-items: center; gap: .75rem;
+  margin-bottom: 1.2rem; padding-bottom: .6rem;
+  border-bottom: 2px solid; flex-wrap: wrap;
 }
 .section-header.cesac-hd { border-color: var(--purple-mid); }
 .section-header.dir-hd   { border-color: var(--gold); }
-
 .section-badge {
-  font-family: 'Cormorant SC', serif;
-  font-size: .65rem;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  padding: .3rem .85rem;
-  border-radius: var(--radius);
-  flex-shrink: 0;
+  font-size: .62rem; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; padding: .28rem .8rem; border-radius: var(--radius); flex-shrink: 0;
 }
 .badge-cesac { background: var(--purple-deep); color: #fff; }
 .badge-dir   { background: var(--gold); color: #fff; }
-
-.section-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.25rem;
-  font-weight: 400;
-  color: var(--ink);
-  letter-spacing: .01em;
-}
-.section-count {
-  margin-left: auto;
-  font-family: 'Cormorant SC', serif;
-  font-size: .68rem;
-  letter-spacing: .08em;
-  color: var(--muted);
-}
+.section-title { font-family: var(--font-display); font-size: 1.15rem; font-weight: 400; color: var(--ink); }
+.section-count { margin-left: auto; font-size: .68rem; font-weight: 500; color: var(--muted); }
 
 /* Area groups */
-.area-group { margin-bottom: 1.75rem; }
+.area-group { margin-bottom: 1.65rem; }
 .area-group.hidden { display: none; }
 .area-group-hd {
-  display: flex;
-  align-items: baseline;
-  gap: .65rem;
-  margin-bottom: .75rem;
-  padding-left: .6rem;
-  border-left: 3px solid var(--purple-ghost);
-  flex-wrap: wrap;
+  display: flex; align-items: baseline; gap: .6rem;
+  margin-bottom: .7rem; padding-left: .55rem;
+  border-left: 3px solid var(--purple-ghost); flex-wrap: wrap;
 }
 .area-group-hd.cesac-g { border-color: var(--purple-light); }
 .area-group-hd.dir-g   { border-color: var(--gold-lt); }
-.area-gname {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: .95rem;
-  font-weight: 500;
-  color: var(--ink);
-}
-.area-gsigla {
-  font-family: 'Cormorant SC', serif;
-  font-size: .62rem;
-  letter-spacing: .09em;
-  color: var(--muted);
-  background: var(--cream-dark);
-  padding: .05rem .4rem;
-  border-radius: 3px;
-  text-transform: uppercase;
-}
-.area-gcount {
-  margin-left: auto;
-  font-family: 'Cormorant SC', serif;
-  font-size: .62rem;
-  letter-spacing: .07em;
-  color: var(--muted);
-}
+.area-gname { font-size: .9rem; font-weight: 600; color: var(--ink); }
+.area-gsigla { font-size: .62rem; font-weight: 600; letter-spacing: .08em; color: var(--muted); background: var(--cream-dark); padding: .04rem .38rem; border-radius: 3px; text-transform: uppercase; }
+.area-gcount { margin-left: auto; font-size: .62rem; color: var(--muted); }
 
 /* Cards grid */
-.cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(288px, 1fr));
-  gap: .7rem;
-}
+.cards-grid { display: grid; grid-template-columns: 1fr; gap: .65rem; }
 
-/* Service card */
+/* ── CARD ─────────────────────────────────────────────────────
+   BUG FIX: el toggle vive SOLO en .card-trigger (.card-head + .card-footer).
+   .card-detail tiene pointer-events:none para no re-disparar el toggle.
+──────────────────────────────────────────────────────────── */
 .card {
-  background: #fff;
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  background: #fff; border: 1px solid var(--rule);
+  border-radius: var(--radius); box-shadow: var(--shadow);
+  overflow: hidden; position: relative;
   transition: box-shadow .2s, transform .15s;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
 }
-.card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
 .card.cesac-c { border-left: 3px solid var(--purple-mid); }
 .card.dir-c   { border-left: 3px solid var(--gold); }
 .card.hidden  { display: none; }
 
-.card-head { padding: .85rem 1rem .6rem; }
-.card-tags {
-  display: flex;
-  align-items: center;
-  gap: .3rem;
-  margin-bottom: .45rem;
-  flex-wrap: wrap;
+/* El trigger es solo el head + footer visible */
+.card-trigger {
+  cursor: pointer;
+  display: block; width: 100%;
+  text-align: left; background: none;
+  padding: 0;
 }
-.tag {
-  font-family: 'Cormorant SC', serif;
-  font-size: .57rem;
-  letter-spacing: .07em;
-  text-transform: uppercase;
-  padding: .1rem .4rem;
-  border-radius: 3px;
-  font-weight: 500;
-}
-.tag-cesac  { background: #EDE9F8; color: var(--purple-deep); }
-.tag-suac   { background: #EDE9F8; color: #6A1B9A; }
-.tag-libre  { background: #E8F5E9; color: #2E7D32; }
-.tag-fmto   { background: #FFF3E0; color: #E65100; }
-.clave-tag  {
-  margin-left: auto;
-  font-family: 'Cormorant SC', serif;
-  font-size: .57rem;
-  letter-spacing: .06em;
-  color: var(--muted);
-}
+.card-trigger:focus-visible { outline: 2px solid var(--purple-mid); outline-offset: -2px; }
+.card:has(.card-trigger:hover) { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
 
-.card-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: .95rem;
-  font-weight: 500;
-  line-height: 1.3;
-  color: var(--ink);
-  margin-bottom: .35rem;
+.card-head { padding: .85rem 1rem .6rem; }
+.card-tags { display: flex; align-items: center; gap: .28rem; margin-bottom: .42rem; flex-wrap: wrap; }
+.tag {
+  font-size: .58rem; font-weight: 700; letter-spacing: .06em;
+  text-transform: uppercase; padding: .1rem .38rem; border-radius: 3px;
 }
-.card-desc {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: .82rem;
-  color: #555;
-  line-height: 1.5;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
+.tag-cesac { background: #EDE9F8; color: var(--purple-deep); }
+.tag-suac  { background: #EDE9F8; color: #6A1B9A; }
+.tag-libre { background: #E8F5E9; color: #2E7D32; }
+.tag-fmto  { background: #FFF3E0; color: #E65100; }
+.clave-tag { margin-left: auto; font-size: .6rem; font-weight: 500; color: var(--muted); }
+
+.card-name { font-family: var(--font-display); font-size: .95rem; font-weight: 600; line-height: 1.3; color: var(--ink); margin-bottom: .32rem; }
+.card-desc { font-size: .8rem; color: #555; line-height: 1.55; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .card.open .card-desc { -webkit-line-clamp: unset; }
 
-.card-footer {
-  display: flex;
-  align-items: center;
-  padding: .45rem 1rem;
-  background: var(--cream);
+.card-footer-bar {
+  display: flex; align-items: center;
+  padding: .42rem 1rem; background: var(--cream);
   border-top: 1px solid var(--rule);
-  font-family: 'Cormorant SC', serif;
-  font-size: .63rem;
-  letter-spacing: .06em;
-  color: var(--muted);
-  gap: .5rem;
+  font-size: .72rem; font-weight: 500; color: var(--muted); gap: .5rem;
 }
-.footer-cost { margin-left: auto; font-weight: 500; color: var(--ink); }
+.footer-hint { font-size: .65rem; color: var(--muted); margin-left: auto; transition: opacity .15s; }
+.card:has(.card-trigger:hover) .footer-hint { opacity: 0; }
+.card.open .footer-hint { opacity: 0; }
+.footer-cost { font-weight: 600; color: var(--ink); }
 .footer-cost.free { color: #2E7D32; }
 
-/* Card detail (expandido) */
+/* ── Detail panel — pointer-events:none previene re-toggle ── */
 .card-detail {
   display: none;
-  padding: .9rem 1rem;
-  background: #FAFAF6;
+  padding: 1rem;
+  background: #FAFAF7;
   border-top: 1px solid var(--rule);
-  font-family: 'Cormorant Garamond', serif;
-  font-size: .82rem;
-  line-height: 1.6;
+  font-size: .8rem; line-height: 1.6;
+  pointer-events: none;   /* ← FIX CRÍTICO: clicks no burbujean al trigger */
 }
 .card.open .card-detail { display: block; }
-.detail-row {
-  display: grid;
-  grid-template-columns: 110px 1fr;
-  gap: .2rem .65rem;
-  margin-bottom: .3rem;
-}
-.detail-lbl {
-  font-family: 'Cormorant SC', serif;
-  font-size: .62rem;
-  letter-spacing: .07em;
-  color: var(--muted);
-  padding-top: .12rem;
-}
-.detail-val { color: var(--ink); }
 
-.expand-hint {
-  position: absolute;
-  bottom: .45rem;
-  right: .75rem;
-  font-family: 'Cormorant SC', serif;
-  font-size: .58rem;
-  letter-spacing: .06em;
-  color: var(--muted);
-  pointer-events: none;
-  transition: opacity .15s;
-}
-.card:hover .expand-hint,
-.card.open .expand-hint { opacity: 0; }
+.detail-row { display: grid; grid-template-columns: 100px 1fr; gap: .18rem .6rem; margin-bottom: .32rem; }
+.detail-lbl { font-size: .65rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); padding-top: .14rem; }
+.detail-val { color: var(--ink); }
 
 /* ═══════════════════════════════════════════════════════════════
    FOOTER
 ═══════════════════════════════════════════════════════════════ */
 .site-footer {
   background: linear-gradient(90deg, #1A1226, #2C1F5C);
-  color: rgba(255,255,255,.55);
-  text-align: center;
-  padding: 1.5rem 2rem;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: .85rem;
-  line-height: 1.8;
-  letter-spacing: .01em;
+  color: rgba(255,255,255,.5);
+  text-align: center; padding: 1.4rem 2rem;
+  font-size: .82rem; line-height: 1.8;
 }
-.site-footer .footer-link {
-  color: rgba(200,184,255,.85);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-.site-footer .footer-link:hover { color: #fff; }
-.site-footer strong { color: rgba(255,255,255,.85); }
-.site-footer .footer-byline {
-  margin-top: .5rem;
-  font-family: 'Cormorant SC', serif;
-  font-size: .68rem;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: rgba(184,150,60,.85);
-}
+.site-footer strong { color: rgba(255,255,255,.82); }
+.footer-link { color: rgba(200,184,255,.82); text-decoration: underline; text-underline-offset: 2px; }
+.footer-link:hover { color: #fff; }
 
 /* ═══════════════════════════════════════════════════════════════
    RESPONSIVE — MOBILE FIRST
-   Breakpoints: base=mobile, 480px=large-phone, 768px=tablet, 1024px=desktop
+   Base: Android / iPhone → 480px → 768px tablet → 1024px desktop
 ═══════════════════════════════════════════════════════════════ */
-
-/* BASE: mobile (Android & iPhone) */
-.layout { grid-template-columns: 1fr; }
-.sidebar {
-  position: static;
-  height: auto;
-  border-right: none;
-  border-bottom: 1px solid var(--rule);
-}
-.main { padding: 1.1rem .9rem 3rem; }
-.cards-grid { grid-template-columns: 1fr; }
-.dir-grid { grid-template-columns: 1fr; }
-.detail-row { grid-template-columns: 1fr; }
-.detail-lbl { color: var(--purple-mid); margin-top: .5rem; }
-.kpi-item { padding: .1rem .8rem; }
-.masthead-inner { gap: .6rem; }
-.masthead-title .name { font-size: .92rem; }
-.masthead-search { min-width: 0; flex: 1; max-width: 100%; }
-.result-count { display: none; }
-
-/* Large phone ≥ 480px */
 @media (min-width: 480px) {
   .main { padding: 1.25rem 1.1rem 3rem; }
-  .cards-grid { grid-template-columns: 1fr; }
   .dir-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+}
+@media (min-width: 768px) {
+  .layout { grid-template-columns: 244px 1fr; }
+  .sidebar { position: sticky; top: 66px; height: calc(100vh - 66px); overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--purple-ghost) transparent; border-right: 1px solid var(--rule); }
+  .sidebar::-webkit-scrollbar { width: 4px; }
+  .sidebar::-webkit-scrollbar-thumb { background: var(--purple-ghost); border-radius: 2px; }
+  .main { padding: 1.5rem 1.4rem 3.5rem; }
+  .cards-grid { grid-template-columns: repeat(auto-fill, minmax(268px, 1fr)); }
+  .dir-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+  .kpi-item { padding: .08rem 1rem; }
+}
+@media (min-width: 1024px) {
+  .layout { grid-template-columns: 260px 1fr; }
+  .main { padding: 1.75rem 1.75rem 4rem; }
+  .cards-grid { grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); }
+  .dir-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+  .kpi-item { padding: .08rem 1.2rem; }
   .result-count { display: block; }
 }
-
-/* Tablet ≥ 768px */
-@media (min-width: 768px) {
-  .layout { grid-template-columns: 240px 1fr; }
-  .sidebar {
-    position: sticky;
-    top: 66px;
-    height: calc(100vh - 66px);
-    border-right: 1px solid var(--rule);
-    border-bottom: none;
-  }
-  .main { padding: 1.5rem 1.4rem 3.5rem; }
-  .cards-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
-  .dir-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
-  .detail-row { grid-template-columns: 100px 1fr; }
-  .kpi-item { padding: .1rem 1rem; }
-  .masthead-title .name { font-size: 1rem; }
-}
-
-/* Desktop ≥ 1024px */
-@media (min-width: 1024px) {
-  .layout { grid-template-columns: 264px 1fr; }
-  .main { padding: 1.75rem 1.75rem 4rem; }
-  .cards-grid { grid-template-columns: repeat(auto-fill, minmax(288px, 1fr)); }
-  .dir-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
-  .detail-row { grid-template-columns: 110px 1fr; }
-  .kpi-item { padding: .1rem 1.2rem; }
-  .masthead-title .name { font-size: 1.1rem; }
-}
-
-/* ── Reduced motion ─────────────────────────────────────────── */
+@media (max-width: 1023px) { .result-count { display: none; } }
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    transition: none !important;
-    animation: none !important;
-  }
+  *, *::before, *::after { transition: none !important; animation: none !important; }
   html { scroll-behavior: auto; }
 }
 </style>
 </head>
 <body>
 
-<!-- Skip navigation -->
 <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
 
 <!-- ══ MASTHEAD ════════════════════════════════════════════════ -->
@@ -930,187 +476,112 @@ img { max-width: 100%; display: block; }
         <div class="name">Catálogo de Servicios Vigentes</div>
       </div>
     </div>
-
     <div class="masthead-search" role="search">
       <span class="search-icon" aria-hidden="true">🔍</span>
       <label for="searchInput" class="skip-link">Buscar servicio</label>
-      <input
-        type="search"
-        id="searchInput"
+      <input type="search" id="searchInput"
         placeholder="Buscar trámite, dependencia, requisito…"
-        autocomplete="off"
-        spellcheck="false"
+        autocomplete="off" spellcheck="false"
         aria-label="Buscar en el catálogo de servicios"
-        aria-controls="main-content"
-        aria-autocomplete="none">
-      <button class="clear-btn" id="clearBtn" onclick="clearSearch()" aria-label="Limpiar búsqueda" title="Limpiar">✕</button>
+        aria-controls="main-content">
+      <button class="clear-btn" id="clearBtn" onclick="clearSearch()" aria-label="Limpiar búsqueda">✕</button>
     </div>
-
     <div class="result-count" id="resultCount" aria-live="polite" aria-atomic="true"></div>
-
-    <!-- Botón accesibilidad -->
-    <button
-      class="a11y-trigger"
-      id="a11y-open-btn"
-      aria-expanded="false"
-      aria-controls="a11y-panel"
-      aria-haspopup="dialog"
-      title="Opciones de accesibilidad">
-      <span aria-hidden="true">♿</span>
-      <span>Accesibilidad</span>
+    <button class="a11y-trigger" id="a11y-open-btn"
+      aria-expanded="false" aria-controls="a11y-panel"
+      aria-haspopup="dialog" title="Opciones de accesibilidad">
+      <span aria-hidden="true">♿</span><span>Accesibilidad</span>
     </button>
   </div>
 </header>
 
 <!-- ══ PANEL ACCESIBILIDAD ════════════════════════════════════ -->
-<div
-  id="a11y-panel"
-  class="a11y-panel"
-  role="dialog"
-  aria-modal="true"
-  aria-labelledby="a11y-panel-title"
-  hidden>
-
-  <div class="a11y-panel-header">
+<div id="a11y-panel" class="a11y-panel" role="dialog" aria-modal="true" aria-labelledby="a11y-panel-title" hidden>
+  <div class="a11y-panel-hd">
     <span id="a11y-panel-title" class="a11y-panel-title">Opciones de Accesibilidad</span>
-    <button class="a11y-close" id="a11y-close-btn" aria-label="Cerrar panel de accesibilidad">✕</button>
+    <button class="a11y-close" id="a11y-close-btn" aria-label="Cerrar">✕</button>
   </div>
-
   <div class="a11y-group">
-    <span class="a11y-group-label" id="font-group-label">Tamaño del texto</span>
-    <div class="a11y-font-controls" role="group" aria-labelledby="font-group-label">
-      <button class="a11y-btn" id="a11y-font-dec" aria-label="Reducir tamaño de texto">A−</button>
-      <div class="a11y-font-display" id="a11y-font-display" aria-live="polite" aria-atomic="true">100%</div>
-      <button class="a11y-btn" id="a11y-font-inc" aria-label="Aumentar tamaño de texto">A+</button>
-      <button class="a11y-btn" id="a11y-font-reset" aria-label="Restablecer tamaño de texto">↺</button>
+    <span class="a11y-group-lbl" id="font-lbl">Tamaño del texto</span>
+    <div class="a11y-font-row" role="group" aria-labelledby="font-lbl">
+      <button class="a11y-btn" id="a11y-font-dec" aria-label="Reducir texto">A−</button>
+      <div class="a11y-font-pct" id="a11y-font-display" aria-live="polite" aria-atomic="true">100%</div>
+      <button class="a11y-btn" id="a11y-font-inc" aria-label="Aumentar texto">A+</button>
+      <button class="a11y-btn" id="a11y-font-reset" aria-label="Restablecer texto">↺</button>
     </div>
   </div>
-
   <div class="a11y-group">
-    <span class="a11y-group-label">Modo de contraste</span>
-    <button
-      class="a11y-contrast-btn"
-      id="a11y-contrast-btn"
-      aria-label="Contraste: Normal — pulsa para cambiar"
-      aria-pressed="false">
-      <span aria-hidden="true">◑</span>
-      Cambiar modo de contraste
+    <span class="a11y-group-lbl">Modo de contraste</span>
+    <button class="a11y-contrast-btn" id="a11y-contrast-btn" aria-label="Contraste: Normal — pulsa para cambiar">
+      <span aria-hidden="true">◑</span> Cambiar modo de contraste
     </button>
   </div>
-
-  <p class="a11y-note">
-    Preferencias guardadas durante esta sesión. Compatible con lectores de pantalla y navegación por teclado (Tab / Escape).
-  </p>
+  <p class="a11y-note">Preferencias guardadas en esta sesión. Navega con Tab y cierra con Escape.</p>
 </div>
 
 <!-- ══ KPI RIBBON ════════════════════════════════════════════ -->
 <div class="kpi-ribbon" role="region" aria-label="Indicadores del catálogo">
   <div class="kpi-inner">
-    <div class="kpi-item">
-      <span class="kpi-value">161</span>
-      <span class="kpi-label">Total Servicios</span>
-    </div>
-    <div class="kpi-item">
-      <span class="kpi-value">156</span>
-      <span class="kpi-label">Vía CESAC / SUAC</span>
-    </div>
-    <div class="kpi-item">
-      <span class="kpi-value">5</span>
-      <span class="kpi-label">Solo Dependencia</span>
-    </div>
-    <div class="kpi-item">
-      <span class="kpi-value">114</span>
-      <span class="kpi-label">Escrito Libre</span>
-    </div>
-    <div class="kpi-item">
-      <span class="kpi-value">6</span>
-      <span class="kpi-label">Formato Oficial</span>
-    </div>
-    <div class="kpi-item">
-      <span class="kpi-value">20 d.h.</span>
-      <span class="kpi-label">Tiempo Mínimo</span>
-    </div>
-    <div class="kpi-item">
-      <span class="kpi-value">~40 d.h.</span>
-      <span class="kpi-label">Tiempo Promedio</span>
-    </div>
-    <div class="kpi-item">
-      <span class="kpi-value">45 d.h.</span>
-      <span class="kpi-label">Tiempo Máximo</span>
-    </div>
-    <div class="kpi-item">
-      <span class="kpi-value">16</span>
-      <span class="kpi-label">Dependencias</span>
-    </div>
+    <div class="kpi-item"><span class="kpi-value">161</span><span class="kpi-label">Total Servicios</span></div>
+    <div class="kpi-item"><span class="kpi-value">156</span><span class="kpi-label">Vía CESAC / SUAC</span></div>
+    <div class="kpi-item"><span class="kpi-value">5</span><span class="kpi-label">Solo Dependencia</span></div>
+    <div class="kpi-item"><span class="kpi-value">114</span><span class="kpi-label">Escrito Libre</span></div>
+    <div class="kpi-item"><span class="kpi-value">6</span><span class="kpi-label">Formato Oficial</span></div>
+    <div class="kpi-item"><span class="kpi-value">20 d.h.</span><span class="kpi-label">Tiempo Mínimo</span></div>
+    <div class="kpi-item"><span class="kpi-value">~40 d.h.</span><span class="kpi-label">Tiempo Promedio</span></div>
+    <div class="kpi-item"><span class="kpi-value">45 d.h.</span><span class="kpi-label">Tiempo Máximo</span></div>
+    <div class="kpi-item"><span class="kpi-value">16</span><span class="kpi-label">Dependencias</span></div>
   </div>
 </div>
 
-<!-- ══ LAYOUT ══════════════════════════════════════════════════ -->
+<!-- ══ LAYOUT ════════════════════════════════════════════════ -->
 <div class="layout">
 
-  <!-- ── SIDEBAR ──────────────────────────────────────────── -->
-  <nav class="sidebar" aria-label="Filtros y navegación del catálogo">
+  <!-- SIDEBAR -->
+  <nav class="sidebar" aria-label="Filtros y navegación">
 
-    <!-- Filtro canal -->
     <div class="sidebar-block">
-      <div class="sidebar-heading" id="filter-canal-label">Canal de trámite</div>
-      <div class="chips" role="group" aria-labelledby="filter-canal-label">
-        <button class="chip active" data-filter="canal" data-val="todos"    onclick="setFilter('canal','todos',this)">Todos</button>
-        <button class="chip"        data-filter="canal" data-val="cesac"    onclick="setFilter('canal','cesac',this)">CESAC / SUAC</button>
-        <button class="chip"        data-filter="canal" data-val="directo"  onclick="setFilter('canal','directo',this)">Solo Dependencia</button>
+      <div class="sidebar-heading" id="lbl-canal">Canal de trámite</div>
+      <div class="chips" role="group" aria-labelledby="lbl-canal">
+        <button class="chip active" data-filter="canal" data-val="todos"   onclick="setFilter('canal','todos',this)">Todos</button>
+        <button class="chip"        data-filter="canal" data-val="cesac"   onclick="setFilter('canal','cesac',this)">CESAC / SUAC</button>
+        <button class="chip"        data-filter="canal" data-val="directo" onclick="setFilter('canal','directo',this)">Solo Dependencia</button>
       </div>
     </div>
 
-    <!-- Filtro formato -->
     <div class="sidebar-block">
-      <div class="sidebar-heading" id="filter-fmt-label">Tipo de solicitud</div>
-      <div class="chips" role="group" aria-labelledby="filter-fmt-label">
+      <div class="sidebar-heading" id="lbl-fmt">Tipo de solicitud</div>
+      <div class="chips" role="group" aria-labelledby="lbl-fmt">
         <button class="chip active" data-filter="formato" data-val="todos"   onclick="setFilter('formato','todos',this)">Todos</button>
         <button class="chip"        data-filter="formato" data-val="escrito" onclick="setFilter('formato','escrito',this)">Escrito libre</button>
         <button class="chip"        data-filter="formato" data-val="formato" onclick="setFilter('formato','formato',this)">Formato oficial</button>
       </div>
     </div>
 
-    <!-- Contacto: Patricia Vivar Piñón (COPACO) -->
     <div class="sidebar-block">
       <div class="sidebar-heading">COPACO — Colonia Juárez</div>
       <div class="paty-card">
         <div class="paty-name">Patricia Vivar Piñón</div>
-        <div class="paty-title">Comisionada &nbsp;·&nbsp; COPACO &nbsp;·&nbsp; Col. Juárez</div>
+        <div class="paty-title">Comisionada · COPACO · Col. Juárez</div>
         <hr class="paty-sep" aria-hidden="true">
-        <div class="paty-row">
-          <span class="paty-icon" aria-hidden="true">📞</span>
-          <span><a href="tel:+525548669718">55 48 66 97 18</a></span>
-        </div>
-        <div class="paty-row">
-          <span class="paty-icon" aria-hidden="true">✉️</span>
-          <span><a href="mailto:contacto@patycopaco.com">contacto@patycopaco.com</a></span>
-        </div>
-        <div class="paty-row">
-          <span class="paty-icon" aria-hidden="true">📍</span>
-          <span>Roma 36, Col. Juárez · Alcaldía Cuauhtémoc, 06000, CDMX</span>
-        </div>
+        <div class="paty-row"><span class="paty-icon" aria-hidden="true">📞</span><span><a href="tel:+525548669718">55 48 66 97 18</a></span></div>
+        <div class="paty-row"><span class="paty-icon" aria-hidden="true">✉️</span><span><a href="mailto:contacto@patycopaco.com">contacto@patycopaco.com</a></span></div>
+        <div class="paty-row"><span class="paty-icon" aria-hidden="true">📍</span><span>Roma 36, Col. Juárez · Alcaldía Cuauhtémoc, 06000, CDMX</span></div>
       </div>
     </div>
 
-    <!-- CESAC institucional -->
     <div class="sidebar-block">
       <div class="sidebar-heading">CESAC — Ventanilla Oficial</div>
-      <div class="cesac-inst-card">
+      <div class="cesac-card">
         <strong>📍 Aldama y Mina s/n</strong>
         Col. Buenavista, Alc. Cuauhtémoc<br>
-        <strong style="margin-top:.45rem">⏰ Lunes–Viernes</strong>
-        09:00–14:00 hrs<br>
-        <strong style="margin-top:.45rem">✉️</strong>
-        <a href="mailto:cesac@alcaldiacuauhtemoc.mx">cesac@alcaldiacuauhtemoc.mx</a><br>
-        <strong style="margin-top:.45rem">🌐 SUAC en línea</strong>
-        <a href="https://atencionciudadana.cdmx.gob.mx/" target="_blank" rel="noopener">atencionciudadana.cdmx.gob.mx</a><br>
-        <strong style="margin-top:.45rem">📞 Locatel</strong>
-        (55) 5658-1111
+        <strong style="margin-top:.4rem">⏰ Lunes–Viernes 09:00–14:00 hrs</strong><br>
+        <strong style="margin-top:.4rem">✉️</strong> <a href="mailto:cesac@alcaldiacuauhtemoc.mx">cesac@alcaldiacuauhtemoc.mx</a><br>
+        <strong style="margin-top:.4rem">🌐</strong> <a href="https://atencionciudadana.cdmx.gob.mx/" target="_blank" rel="noopener">atencionciudadana.cdmx.gob.mx</a><br>
+        <strong style="margin-top:.4rem">📞 Locatel</strong> (55) 5658-1111
       </div>
     </div>
 
-    <!-- Índice por dependencia -->
     <div class="sidebar-block">
       <div class="sidebar-heading">Índice por dependencia</div>
       <div id="navIndex" role="list"></div>
@@ -1118,22 +589,19 @@ img { max-width: 100%; display: block; }
 
   </nav>
 
-  <!-- ── MAIN ─────────────────────────────────────────────── -->
+  <!-- MAIN -->
   <main class="main" id="main-content" tabindex="-1">
 
-    <!-- Directorio -->
     <section class="directory-wrap" id="directorySection" aria-label="Directorio de dependencias">
       <h2 class="directory-title">Directorio de Dependencias · Alcaldía Cuauhtémoc</h2>
-      <div class="dir-grid" id="dirGrid"></div>
+      <div class="dir-grid" id="dirGrid" role="list"></div>
     </section>
 
-    <!-- Empty state -->
     <div class="empty-state" id="emptyState" role="status" aria-live="polite">
       <div class="empty-icon" aria-hidden="true">🔎</div>
-      <p>No se encontraron servicios que coincidan con tu búsqueda.<br>Prueba con otro término o ajusta los filtros.</p>
+      <p>No se encontraron servicios con esa búsqueda.<br>Prueba otro término o ajusta los filtros.</p>
     </div>
 
-    <!-- SECCIÓN CESAC/SUAC -->
     <section class="section-block" id="block-cesac" aria-label="Trámites vía CESAC o SUAC">
       <div class="section-header cesac-hd">
         <span class="section-badge badge-cesac">CESAC / SUAC</span>
@@ -1143,7 +611,6 @@ img { max-width: 100%; display: block; }
       <div id="groups-cesac"></div>
     </section>
 
-    <!-- SECCIÓN DIRECTO -->
     <section class="section-block" id="block-directo" aria-label="Trámites directamente con la dependencia">
       <div class="section-header dir-hd">
         <span class="section-badge badge-dir">Solo Dependencia</span>
@@ -1160,23 +627,42 @@ img { max-width: 100%; display: block; }
 <footer class="site-footer" role="contentinfo">
   <strong>Catálogo de Servicios de Alcaldía Cuauhtémoc Vigentes</strong><br>
   <a class="footer-link"
-     href="https://cuauhtemoc.cdmx.gob.mx/wp-content/uploads/2022/07/CATALOGO-DE-SERVICIOS-ALCALDIA-CUAUHTEMOC-2021-FINAL.pdf"
-     target="_blank"
-     rel="noopener"
-     aria-label="Fuente oficial — abre el PDF del catálogo en una nueva pestaña">Fuente oficial</a>:
+    href="https://cuauhtemoc.cdmx.gob.mx/wp-content/uploads/2022/07/CATALOGO-DE-SERVICIOS-ALCALDIA-CUAUHTEMOC-2021-FINAL.pdf"
+    target="_blank" rel="noopener"
+    aria-label="Fuente oficial — abre el PDF del catálogo en nueva pestaña">Fuente oficial</a>:
   Alcaldía Cuauhtémoc, Ciudad de México – Creado por la Comisionada COPACO Patricia Vivar
-  <div class="footer-byline">COPACO · Colonia Juárez · Alcaldía Cuauhtémoc · 2024</div>
 </footer>
 
-<!-- ══ SCRIPTS ═══════════════════════════════════════════════ -->
+<!-- ══ SCRIPTS ════════════════════════════════════════════════ -->
 <script src="a11y.js" defer></script>
 <script>
 /* ════════════════════════════════════════════════════════════
-   LÓGICA DEL CATÁLOGO
+   CONFIGURACIÓN: solo mostrar la territorial Juárez San Rafael
+   Las demás 7 direcciones territoriales no aparecen en el índice
+   ni en las secciones de servicios.
 ════════════════════════════════════════════════════════════ */
-const state = { query: '', canal: 'todos', formato: 'todos' };
+var ALLOWED_TERRITORIAL = 'DT-JUAREZ';   // única territorial visible
 
-document.addEventListener('DOMContentLoaded', function () {
+/* ════════════════════════════════════════════════════════════
+   FILTRO GLOBAL DE AREAS VISIBLES
+════════════════════════════════════════════════════════════ */
+function isAreaVisible(area) {
+  if (area.tipo === 'central') return true;
+  return area.id === ALLOWED_TERRITORIAL;
+}
+
+function isServiceVisible(s) {
+  var area = SERVICES_DATA.areas.find(function(a){ return a.id === s.area_id; });
+  if (!area) return false;
+  return isAreaVisible(area);
+}
+
+/* ════════════════════════════════════════════════════════════
+   ESTADO
+════════════════════════════════════════════════════════════ */
+var state = { query: '', canal: 'todos', formato: 'todos' };
+
+document.addEventListener('DOMContentLoaded', function() {
   buildDirectory();
   buildNavIndex();
   buildServiceSections();
@@ -1185,140 +671,157 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /* ── Directorio ─────────────────────────────────────────── */
 function buildDirectory() {
-  const grid = document.getElementById('dirGrid');
-  const central    = SERVICES_DATA.areas.filter(function(a){ return a.tipo === 'central'; });
-  const territorial = SERVICES_DATA.areas.filter(function(a){ return a.tipo === 'territorial'; });
+  var grid = document.getElementById('dirGrid');
+  var visibleAreas = SERVICES_DATA.areas.filter(isAreaVisible);
+  var central    = visibleAreas.filter(function(a){ return a.tipo === 'central'; });
+  var territorial = visibleAreas.filter(function(a){ return a.tipo === 'territorial'; });
 
   function renderCards(areas, tipo) {
     return areas.map(function(a) {
       var n = SERVICES_DATA.services.filter(function(s){ return s.area_id === a.id; }).length;
-      var label = tipo === 'central' ? 'Dirección Central' : 'Dir. / Subdirección Territorial';
+      var lbl = tipo === 'central' ? 'Dirección Central' : 'Dirección Territorial';
       return '<div class="dir-card ' + tipo + '" role="listitem">'
-        + '<div class="dir-type">' + label + '</div>'
+        + '<div class="dir-type">' + lbl + '</div>'
         + '<div class="dir-name">' + a.nombre + '</div>'
-        + '<div class="dir-meta"><span class="dir-siglas">' + a.siglas + '</span>'
-        + '<span class="dir-count">' + n + ' servicio' + (n !== 1 ? 's' : '') + '</span></div>'
-        + '</div>';
+        + '<div class="dir-meta">'
+        + '<span class="dir-siglas">' + a.siglas + '</span>'
+        + '<span class="dir-count">' + n + ' servicio' + (n!==1?'s':'') + '</span>'
+        + '</div></div>';
     }).join('');
   }
-  grid.setAttribute('role', 'list');
   grid.innerHTML = renderCards(central, 'central') + renderCards(territorial, 'territorial');
 }
 
 /* ── Índice de navegación ───────────────────────────────── */
 function buildNavIndex() {
   var nav = document.getElementById('navIndex');
-  nav.innerHTML = SERVICES_DATA.areas.map(function(a) {
+  var visibleAreas = SERVICES_DATA.areas.filter(isAreaVisible);
+  nav.innerHTML = visibleAreas.map(function(a) {
     var n = SERVICES_DATA.services.filter(function(s){ return s.area_id === a.id; }).length;
-    var short = a.nombre.length > 30 ? a.nombre.substring(0, 30) + '…' : a.nombre;
-    return '<button class="nav-area' + (a.tipo === 'territorial' ? ' territorial' : '') + '"'
-      + ' role="listitem"'
-      + ' aria-label="Ir a ' + a.nombre + '"'
-      + ' onclick="scrollToArea(\'' + a.id + '\')">'
-      + '<span>' + short + '</span>'
-      + '<span class="nav-badge">' + n + '</span>'
+    var short = a.nombre.length > 30 ? a.nombre.substring(0,30)+'…' : a.nombre;
+    return '<button class="nav-area' + (a.tipo==='territorial'?' territorial':'') + '"'
+      + ' role="listitem" aria-label="Ir a '+a.nombre+'"'
+      + ' onclick="scrollToArea(\''+a.id+'\')">'
+      + '<span>'+short+'</span>'
+      + '<span class="nav-badge">'+n+'</span>'
       + '</button>';
   }).join('');
 }
 
 /* ── Secciones de servicios ─────────────────────────────── */
 function buildServiceSections() {
-  var cesacContainer  = document.getElementById('groups-cesac');
-  var directoContainer = document.getElementById('groups-directo');
+  var cesacC  = document.getElementById('groups-cesac');
+  var directoC = document.getElementById('groups-directo');
+  var visibleAreas = SERVICES_DATA.areas.filter(isAreaVisible);
 
-  var cesacAreas  = SERVICES_DATA.areas.filter(function(a){
-    return SERVICES_DATA.services.some(function(s){ return s.area_id === a.id && s.via_cesac; });
+  var cesacAreas  = visibleAreas.filter(function(a){
+    return SERVICES_DATA.services.some(function(s){ return s.area_id===a.id && s.via_cesac; });
   });
-  var directoAreas = SERVICES_DATA.areas.filter(function(a){
-    return SERVICES_DATA.services.some(function(s){ return s.area_id === a.id && !s.via_cesac; });
+  var directoAreas = visibleAreas.filter(function(a){
+    return SERVICES_DATA.services.some(function(s){ return s.area_id===a.id && !s.via_cesac; });
   });
 
-  cesacContainer.innerHTML  = cesacAreas.map(function(a){ return buildAreaGroup(a, true); }).join('');
-  directoContainer.innerHTML = directoAreas.map(function(a){ return buildAreaGroup(a, false); }).join('');
+  cesacC.innerHTML  = cesacAreas.map(function(a){ return buildAreaGroup(a,true); }).join('');
+  directoC.innerHTML = directoAreas.map(function(a){ return buildAreaGroup(a,false); }).join('');
 }
 
 function buildAreaGroup(area, isCesac) {
   var services = SERVICES_DATA.services.filter(function(s){
-    return s.area_id === area.id && (isCesac ? s.via_cesac : !s.via_cesac);
+    return s.area_id===area.id && (isCesac ? s.via_cesac : !s.via_cesac);
   });
   if (!services.length) return '';
   var gcls = isCesac ? 'cesac-g' : 'dir-g';
-  var gid  = 'group-' + area.id + '-' + (isCesac ? 'cesac' : 'dir');
-  return '<div class="area-group" id="' + gid + '" data-area="' + area.id + '">'
-    + '<div class="area-group-hd ' + gcls + '">'
-    + '<span class="area-gname">' + area.nombre + '</span>'
-    + '<span class="area-gsigla">' + area.siglas + '</span>'
-    + '<span class="area-gcount">' + services.length + ' servicio' + (services.length !== 1 ? 's' : '') + '</span>'
+  var gid  = 'group-'+area.id+'-'+(isCesac?'cesac':'dir');
+  return '<div class="area-group" id="'+gid+'" data-area="'+area.id+'">'
+    + '<div class="area-group-hd '+gcls+'">'
+    + '<span class="area-gname">'+area.nombre+'</span>'
+    + '<span class="area-gsigla">'+area.siglas+'</span>'
+    + '<span class="area-gcount">'+services.length+' servicio'+(services.length!==1?'s':'')+'</span>'
     + '</div>'
-    + '<div class="cards-grid">' + services.map(buildCard).join('') + '</div>'
+    + '<div class="cards-grid">'+services.map(buildCard).join('')+'</div>'
     + '</div>';
 }
 
+/* ── Build card — toggle en .card-trigger, detail inerte ── */
 function buildCard(s) {
-  var costo   = s.costo || 'Consultar';
-  var tiempo  = s.tiempo || 'Variable';
-  var isFree  = costo.toLowerCase().indexOf('gratuit') !== -1;
+  var costo  = s.costo || 'Consultar';
+  var tiempo = s.tiempo || 'Variable';
+  var isFree = costo.toLowerCase().indexOf('gratuit') !== -1;
   var cardCls = s.via_cesac ? 'cesac-c' : 'dir-c';
+  var gid = 'card-'+s.id;
 
   var tags = '';
   if (s.via_cesac)       tags += '<span class="tag tag-cesac">CESAC</span>';
   if (s.via_suac)        tags += '<span class="tag tag-suac">SUAC</span>';
   if (s.escrito_libre)   tags += '<span class="tag tag-libre">Escrito Libre</span>';
   if (s.formato_oficial) tags += '<span class="tag tag-fmto">Formato Oficial</span>';
-  tags += '<span class="clave-tag">' + s.clave + '</span>';
+  tags += '<span class="clave-tag">'+s.clave+'</span>';
 
-  var safeReqs = (s.requisitos || '').replace(/"/g, '&quot;').replace(/</g, '&lt;');
-  var safeTipo = (s.tipo_formato || '').replace(/"/g, '&quot;').replace(/</g, '&lt;');
-  var safePub  = (s.publico || '').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+  var safeReqs = (s.requisitos||'').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+  var safeTipo = (s.tipo_formato||'').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+  var safePub  = (s.publico||'').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+  var safeName = s.nombre.replace(/"/g,'&quot;');
+  var searchTxt = (s.nombre+' '+s.descripcion+' '+(s.requisitos||'')+' '+s.area_id).toLowerCase().replace(/"/g,'&quot;');
 
-  var searchText = (s.nombre + ' ' + s.descripcion + ' ' + (s.requisitos||'') + ' ' + s.area_id).toLowerCase();
+  return '<article class="card '+cardCls+'"'
+    + ' id="'+gid+'"'
+    + ' data-id="'+s.id+'"'
+    + ' data-search="'+searchTxt+'"'
+    + ' data-cesac="'+s.via_cesac+'"'
+    + ' data-escrito="'+s.escrito_libre+'"'
+    + ' data-formato="'+s.formato_oficial+'">'
 
-  return '<article class="card ' + cardCls + '"'
-    + ' data-id="' + s.id + '"'
-    + ' data-search="' + searchText.replace(/"/g,'&quot;') + '"'
-    + ' data-cesac="' + s.via_cesac + '"'
-    + ' data-escrito="' + s.escrito_libre + '"'
-    + ' data-formato="' + s.formato_oficial + '"'
-    + ' onclick="toggleCard(this)"'
-    + ' role="button"'
-    + ' tabindex="0"'
+    /* ── trigger: solo head + footer-bar ── */
+    + '<button class="card-trigger"'
+    + ' onclick="toggleCard(\''+gid+'\')"'
     + ' aria-expanded="false"'
-    + ' onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();toggleCard(this);}"'
-    + ' aria-label="' + s.nombre.replace(/"/g,'&quot;') + '">'
+    + ' aria-controls="detail-'+s.id+'"'
+    + ' aria-label="'+safeName+' — pulsa para ver detalle">'
     + '<div class="card-head">'
-    + '<div class="card-tags">' + tags + '</div>'
-    + '<div class="card-name">' + s.nombre + '</div>'
-    + '<div class="card-desc">' + s.descripcion + '</div>'
+    + '<div class="card-tags">'+tags+'</div>'
+    + '<div class="card-name">'+s.nombre+'</div>'
+    + '<div class="card-desc">'+s.descripcion+'</div>'
     + '</div>'
-    + '<div class="card-footer">'
-    + '<span>🕐 ' + tiempo + '</span>'
-    + '<span class="footer-cost' + (isFree ? ' free' : '') + '">' + (isFree ? '✓ Gratuito' : costo) + '</span>'
+    + '<div class="card-footer-bar">'
+    + '<span>🕐 '+tiempo+'</span>'
+    + '<span class="footer-hint">▼ ver detalle</span>'
+    + '<span class="footer-cost'+(isFree?' free':'')+'">'+( isFree?'✓ Gratuito':costo)+'</span>'
     + '</div>'
-    + '<div class="card-detail" aria-hidden="true">'
-    + '<div class="detail-row"><span class="detail-lbl">Tipo de solicitud</span><span class="detail-val">' + (safeTipo||'—') + '</span></div>'
-    + '<div class="detail-row"><span class="detail-lbl">Requisitos</span><span class="detail-val">' + (safeReqs||'—') + '</span></div>'
-    + '<div class="detail-row"><span class="detail-lbl">Dirigido a</span><span class="detail-val">' + (safePub||'—') + '</span></div>'
-    + '<div class="detail-row"><span class="detail-lbl">Tiempo de resp.</span><span class="detail-val">' + tiempo + '</span></div>'
-    + '<div class="detail-row"><span class="detail-lbl">Costo</span><span class="detail-val">' + costo + '</span></div>'
+    + '</button>'
+
+    /* ── detail: pointer-events:none — nunca re-dispara toggle ── */
+    + '<div class="card-detail" id="detail-'+s.id+'" aria-hidden="true">'
+    + '<div class="detail-row"><span class="detail-lbl">Tipo de solicitud</span><span class="detail-val">'+(safeTipo||'—')+'</span></div>'
+    + '<div class="detail-row"><span class="detail-lbl">Requisitos</span><span class="detail-val">'+(safeReqs||'—')+'</span></div>'
+    + '<div class="detail-row"><span class="detail-lbl">Dirigido a</span><span class="detail-val">'+(safePub||'—')+'</span></div>'
+    + '<div class="detail-row"><span class="detail-lbl">Tiempo de resp.</span><span class="detail-val">'+tiempo+'</span></div>'
+    + '<div class="detail-row"><span class="detail-lbl">Costo</span><span class="detail-val">'+costo+'</span></div>'
     + '</div>'
-    + '<span class="expand-hint" aria-hidden="true">▼ ver detalle</span>'
     + '</article>';
 }
 
-/* ── Toggle de card ─────────────────────────────────────── */
-function toggleCard(el) {
-  var wasOpen = el.classList.contains('open');
+/* ── Toggle ─────────────────────────────────────────────── */
+function toggleCard(cardId) {
+  var card = document.getElementById(cardId);
+  if (!card) return;
+  var trigger = card.querySelector('.card-trigger');
+  var detail  = card.querySelector('.card-detail');
+  var wasOpen = card.classList.contains('open');
+
+  /* Cerrar todos */
   document.querySelectorAll('.card.open').forEach(function(c) {
     c.classList.remove('open');
-    c.setAttribute('aria-expanded', 'false');
-    var detail = c.querySelector('.card-detail');
-    if (detail) detail.setAttribute('aria-hidden', 'true');
+    var t = c.querySelector('.card-trigger');
+    var d = c.querySelector('.card-detail');
+    if (t) t.setAttribute('aria-expanded','false');
+    if (d) d.setAttribute('aria-hidden','true');
   });
+
+  /* Abrir si estaba cerrado */
   if (!wasOpen) {
-    el.classList.add('open');
-    el.setAttribute('aria-expanded', 'true');
-    var d = el.querySelector('.card-detail');
-    if (d) d.setAttribute('aria-hidden', 'false');
+    card.classList.add('open');
+    if (trigger) trigger.setAttribute('aria-expanded','true');
+    if (detail)  detail.setAttribute('aria-hidden','false');
   }
 }
 
@@ -1328,92 +831,63 @@ searchInput.addEventListener('input', function() {
   state.query = this.value.trim().toLowerCase();
   applyFilters();
 });
-
 function clearSearch() {
-  searchInput.value = '';
-  state.query = '';
-  applyFilters();
-  searchInput.focus();
+  searchInput.value = ''; state.query = ''; applyFilters(); searchInput.focus();
 }
 
-/* ── Chips de filtro ────────────────────────────────────── */
+/* ── Filtros ────────────────────────────────────────────── */
 function setFilter(type, val, btn) {
   state[type] = val;
-  document.querySelectorAll('[data-filter="' + type + '"]').forEach(function(c) {
-    c.classList.remove('active');
-  });
+  document.querySelectorAll('[data-filter="'+type+'"]').forEach(function(c){ c.classList.remove('active'); });
   btn.classList.add('active');
   applyFilters();
 }
 
 /* ── Aplicar filtros ────────────────────────────────────── */
 function applyFilters() {
-  var q     = state.query;
-  var canal = state.canal;
-  var fmt   = state.formato;
-  var total = 0, cesacN = 0, directoN = 0;
+  var q=state.query, canal=state.canal, fmt=state.formato;
+  var total=0, cesacN=0, directoN=0;
 
   document.querySelectorAll('.card').forEach(function(card) {
-    var matchSearch = !q || card.dataset.search.indexOf(q) !== -1;
-    var isCesac   = card.dataset.cesac === 'true';
-    var isEscrito = card.dataset.escrito === 'true';
-    var isFormato = card.dataset.formato === 'true';
-
-    var matchCanal = canal === 'todos'
-      || (canal === 'cesac'   && isCesac)
-      || (canal === 'directo' && !isCesac);
-    var matchFmt = fmt === 'todos'
-      || (fmt === 'escrito' && isEscrito)
-      || (fmt === 'formato' && isFormato);
-
-    var visible = matchSearch && matchCanal && matchFmt;
-    card.classList.toggle('hidden', !visible);
-    if (visible) { total++; if (isCesac) cesacN++; else directoN++; }
+    var ms = !q || card.dataset.search.indexOf(q) !== -1;
+    var ic = card.dataset.cesac==='true';
+    var ie = card.dataset.escrito==='true';
+    var ifo= card.dataset.formato==='true';
+    var mc = canal==='todos' || (canal==='cesac'&&ic) || (canal==='directo'&&!ic);
+    var mf = fmt==='todos'   || (fmt==='escrito'&&ie) || (fmt==='formato'&&ifo);
+    var vis= ms && mc && mf;
+    card.classList.toggle('hidden',!vis);
+    if (vis){ total++; if(ic) cesacN++; else directoN++; }
   });
 
-  /* Ocultar grupos vacíos */
-  document.querySelectorAll('.area-group').forEach(function(g) {
-    g.classList.toggle('hidden', g.querySelectorAll('.card:not(.hidden)').length === 0);
+  document.querySelectorAll('.area-group').forEach(function(g){
+    g.classList.toggle('hidden', g.querySelectorAll('.card:not(.hidden)').length===0);
   });
+  document.getElementById('block-cesac').classList.toggle('hidden', cesacN===0);
+  document.getElementById('block-directo').classList.toggle('hidden', directoN===0);
+  document.getElementById('count-cesac').textContent  = cesacN+' resultado'+(cesacN!==1?'s':'');
+  document.getElementById('count-directo').textContent = directoN+' resultado'+(directoN!==1?'s':'');
 
-  /* Ocultar bloques vacíos */
-  document.getElementById('block-cesac').classList.toggle('hidden', cesacN === 0);
-  document.getElementById('block-directo').classList.toggle('hidden', directoN === 0);
-
-  /* Actualizar contadores */
-  document.getElementById('count-cesac').textContent
-    = cesacN + ' resultado' + (cesacN !== 1 ? 's' : '');
-  document.getElementById('count-directo').textContent
-    = directoN + ' resultado' + (directoN !== 1 ? 's' : '');
-
-  /* Directorio solo visible sin filtros activos */
-  var filtering = q || canal !== 'todos' || fmt !== 'todos';
+  var filtering = q || canal!=='todos' || fmt!=='todos';
   document.getElementById('directorySection').style.display = filtering ? 'none' : '';
-
-  /* Estado vacío */
-  document.getElementById('emptyState').style.display = total === 0 ? 'block' : 'none';
-
+  document.getElementById('emptyState').style.display = total===0 ? 'block' : 'none';
   updateResultCount(total);
 }
 
 function updateResultCount(n) {
   var el = document.getElementById('resultCount');
-  if (n === undefined) {
-    el.textContent = SERVICES_DATA.services.length + ' servicios';
-  } else if (state.query || state.canal !== 'todos' || state.formato !== 'todos') {
-    el.textContent = n + ' de ' + SERVICES_DATA.services.length;
-  } else {
-    el.textContent = SERVICES_DATA.services.length + ' servicios';
-  }
+  var total = SERVICES_DATA.services.filter(isServiceVisible).length;
+  if (n===undefined) { el.textContent = total+' servicios'; }
+  else if (state.query||state.canal!=='todos'||state.formato!=='todos') { el.textContent = n+' de '+total; }
+  else { el.textContent = total+' servicios'; }
 }
 
 /* ── Scroll a área ──────────────────────────────────────── */
 function scrollToArea(areaId) {
-  var el = document.getElementById('group-' + areaId + '-cesac')
-        || document.getElementById('group-' + areaId + '-dir');
+  var el = document.getElementById('group-'+areaId+'-cesac')
+        || document.getElementById('group-'+areaId+'-dir');
   if (el) {
-    var offset = 80;
-    var top = el.getBoundingClientRect().top + window.pageYOffset - offset;
+    var top = el.getBoundingClientRect().top + window.pageYOffset - 80;
     window.scrollTo({ top: top, behavior: 'smooth' });
   }
 }
